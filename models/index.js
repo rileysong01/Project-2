@@ -25,4 +25,4 @@ Deck.belongsTo(Card, {
   foreignKey: 'cardID',
 });
 
-module.exports = { User, Deck, Card };
+module.exports = { Users, Deck, Decks, FeatureCard, Card };
