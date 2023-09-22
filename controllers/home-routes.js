@@ -5,7 +5,7 @@ const {
   Deck,
   Decks,
   FeatureCard,
-  Users,
+  Players,
 } = require('../models');
 
 // GET all cards for the deck in the homepage
