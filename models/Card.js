@@ -16,7 +16,7 @@ Card.init(
       allowNull: false,
     },
     cost: {
-      type: DataTypes.INTETER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     power: {
