@@ -1,21 +1,34 @@
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
-let sequelize;
+// let sequelize;
 
-if (process.env.JAWSDB_URL) {
-  sequelize = new Sequelize(process.env.JAWSDB_URL);
-} else {
-  sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
+// sequelize = new Sequelize(process.env.DATABASE_URL);
+
+const sequelize = new Sequelize(
+    process.env.DATABASE_NAME,
+    process.env.DATABASE_USERNAME,
+    process.env.DATABASE_PASSWORD,
     {
-      host: '127.0.0.1',
-      dialect: 'mysql',
-      port: 3001
+      host: process.env.HOST,
+      dialect: "mysql",
+      dialectOptions: {
+        ssl: {
+          rejectUnauthorized: true,
+        },
+      },
+      define: {
+        timestamps: false,
+      },
     }
   );
+
+
+try {
+  sequelize.authenticate();
+  console.log('Connection has been established successfully.');
+} catch (error) {
+  console.error('Unable to connect to the database:', error);
 }
 
 module.exports = sequelize;
