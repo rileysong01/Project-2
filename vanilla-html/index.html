@@ -27,28 +27,49 @@
                 </div>
 
                 <!-- Add the Filter by Category Dropdown -->
-                <div class="dropdown mb-3">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="categoryDropdown"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Filter by Category
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="categoryDropdown">
-                        <a class="dropdown-item" href="#">Category 1</a>
-                        <a class="dropdown-item" href="#">Category 2</a>
-                        <a class="dropdown-item" href="#">Category 3</a>
+                    <div class="dropdown-menu" style="width: 200px;">
+                        <form>
+                            <div class="form-group">
+                                <label class="dropdown-item">
+                                    <input type="checkbox" value="Category 1"> Category 1
+                                </label>
+                                <label class="dropdown-item">
+                                    <input type="checkbox" value="Category 2"> Category 2
+                                </label>
+                                <label class="dropdown-item">
+                                    <input type="checkbox" value="Category 3"> Category 3
+                                </label>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-sm" id="applyFilters">Apply</button>
+                        </form>
                     </div>
                 </div>
+            
 
                 <!-- Add the Filter by Location Dropdown -->
-                <div class="dropdown mb-3">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="locationDropdown"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Filter by Location
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Filter by Power
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="locationDropdown">
-                        <a class="dropdown-item" href="#">Location 1</a>
-                        <a class="dropdown-item" href="#">Location 2</a>
-                        <a class="dropdown-item" href="#">Location 3</a>
+                    <div class="dropdown-menu" style="width: 200px;">
+                        <form>
+                            <div class="form-group">
+                                <label class="dropdown-item">
+                                    <input type="checkbox" value="Category 1"> Power 1
+                                </label>
+                                <label class="dropdown-item">
+                                    <input type="checkbox" value="Category 2"> Power 2
+                                </label>
+                                <label class="dropdown-item">
+                                    <input type="checkbox" value="Category 3"> Power 3
+                                </label>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-sm" id="applyFilters">Apply</button>
+                        </form>
                     </div>
                 </div>
             </div>

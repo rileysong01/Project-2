@@ -23,4 +23,28 @@ header, .project:not(:last-child) {
   margin-left: -5px;
 }
 
+.add-to-deck-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(128, 128, 128, 0.5); /* Grey transparent background */
+  border: none;
+  color: #fff;
+  padding: 0; /* Remove padding */
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0; /* Initially invisible */
+  display: flex; /* Use flexbox to center content vertically and horizontally */
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s; /* Smooth transition effect */
+}
+
+.card:hover .add-to-deck-button {
+  opacity: 1; /* Visible on hover */
+}
 
