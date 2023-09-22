@@ -13,7 +13,7 @@ FeatureCard.init(
     },
     cardID: {
       type: DataTypes.BIGINT,
-      /* allowNull: false, */
+      allowNull: false,
       references: {
         model: 'card',
         key: 'id',
