@@ -14,10 +14,10 @@ PlayerDecks.init(
     deckID: {
       type: DataTypes.BIGINT,
       allowNull: false,
-      references: {
+      /* references: {
         model: 'deck',
-        key: 'id',
-      },
+        key: 'id', 
+      }, */
     },
     deckName: {
       type: DataTypes.STRING,
