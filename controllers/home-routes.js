@@ -1,17 +1,17 @@
 const router = require('express').Router();
 const {
   Card,
-  Category,
-  Deck,
-  Decks,
-  FeatureCard,
+  /* Category, */
+  /* Deck, */
+  PlayerDecks,
+  /* FeatureCard, */
   Players,
 } = require('../models');
 
 // GET all cards for the deck in the homepage
 router.get('/', async (req, res) => {
   try {
-    const dbDeckData = await Deck.findAll({
+    const dbPlayerDecskData = await PlayerDecks.findAll({
       include: [
         {
           model: Card,
@@ -20,9 +20,11 @@ router.get('/', async (req, res) => {
       ],
     });
 
-    const deck = dbDeckData.map((deck) => deck.get({ plain: true }));
+    const playerDecks = dbPlayerDecksData.map((playerDecks) =>
+      playerDecks.get({ plain: true })
+    );
     res.render('homepage', {
-      deck,
+      playerDecks,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {
@@ -32,9 +34,9 @@ router.get('/', async (req, res) => {
 });
 
 // GET one card
-router.get('/deck/:id', async (req, res) => {
+router.get('/playerDecks/:id', async (req, res) => {
   try {
-    const dbDeckData = await Deck.findByPk(req.params.id, {
+    const dbPlayerDecksData = await PlayerDecks.findByPk(req.params.id, {
       include: [
         {
           model: Card,
@@ -50,8 +52,8 @@ router.get('/deck/:id', async (req, res) => {
       ],
     });
 
-    const deck = dbDeckData.get({ plain: true });
-    res.render('deck', { deck, loggedIn: req.session.loggedIn });
+    const playerDecks = dbPlayerDecksData.get({ plain: true });
+    res.render('playerdecks', { playerDecks, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
