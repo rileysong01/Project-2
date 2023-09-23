@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
       loggedIn: req.session.loggedIn,
     });
 
-    res.render('homepage');
+    // res.render('homepage');
 
   } catch (err) {
     console.log(err);
