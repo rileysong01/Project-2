@@ -25,10 +25,10 @@ Players.init(
     deckID: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
+      /* references: {
         model: 'decks',
         key: 'id',
-      },
+      }, */
     },
   },
   {
