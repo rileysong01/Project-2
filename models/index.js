@@ -1,6 +1,7 @@
 const Players = require('./Players');
 const PlayerDecks = require('./PlayerDecks');
 const Card = require('./Card');
+const Account = require('./Account')
 
 // const CardsJson = require('../seeds/Cards.json')
 
@@ -24,4 +25,24 @@ const Card = require('./Card');
 //   dataEntires.push(dataEntry)
 // }))
 
-module.exports = {Card,PlayerDecks,Players};
+
+Account.hasOne(Players, { constraints: false })
+
+Players.hasMany(PlayerDecks,  { constraints: false } )
+Card.hasMany(PlayerDecks,  { constraints: false })
+
+// Card.hasMany
+
+// Players.belongsTo(Account,{ constraints: false } )
+
+// PlayerDecks.hasMany(Players, { constraints: false })
+// PlayerDecks.hasMany(Card, { constraints: false })
+
+
+
+Players.sync({alter:true})
+PlayerDecks.sync({alter:true})
+Account.sync({alter:true})
+Card.sync({alter:true})
+
+module.exports = {Card,PlayerDecks,Players,Account};
