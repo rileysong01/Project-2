@@ -1,10 +1,6 @@
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
-// let sequelize;
-
-// sequelize = new Sequelize(process.env.DATABASE_URL);
-
 const sequelize = new Sequelize(
     process.env.DATABASE_NAME,
     process.env.DATABASE_USERNAME,
@@ -22,7 +18,6 @@ const sequelize = new Sequelize(
       },
     }
   );
-
 
 try {
   sequelize.authenticate();
