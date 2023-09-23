@@ -6,9 +6,10 @@ class Players extends Model {}
 Players.init(
   {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.UUID, //why not INTEGER??
       allowNull: false,
       primaryKey: true,
+      autoIncrement:true
     },
     username: {
       type: DataTypes.STRING,
