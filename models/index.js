@@ -1,12 +1,16 @@
 // const Users = require('./Users');
 // const Deck = require('./Deck');
 const Decks = require('./Decks');
+const Players = require('./Players');
+const Deck = require('./Deck');
+const PlayerDecks = require('./PlayerDecks');
 const Card = require('./Card');
 const Category = require('./Category');
 const FeatureCard = require('./FeatureCard');
 const CardsJson = require('../seeds/Cards.json')
 
 const keys = Object.keys(CardsJson)
+
 
 dataEntires = []
 
@@ -24,6 +28,24 @@ keys.forEach(((key) => {
   dataEntires.push(dataEntry)
 }))
 
+Deck.hasMany(Card, {
+  foreignKey: 'deck_id',
+});
+
+FeatureCard.belongsTo(Card, {
+  foreignKey: 'cardID',
+});
+
+Players.belongsTo(PlayerDecks, {
+  foreignKey: 'deckID',
+});
+
+Deck.belongsTo(PlayerDecks, {
+  foreignKey: 'deckID',
+});
+
+
+
 
 
 Card.sync({force:true}).then(() =>{
@@ -38,3 +60,4 @@ Card.sync({force:true}).then(() =>{
 
 
 module.exports = {Card};
+module.exports = { Players, Deck, PlayerDecks, FeatureCard, Card };
