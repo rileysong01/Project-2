@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { response } = require('express');
 const {
   Card,
   /* Category, */
@@ -32,6 +33,31 @@ router.get('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
+router.get('/cards', async (req, res) => {
+  try {
+    
+    const dbCardData = await Card.findAll();
+    
+    
+    // res.render('homepage', {
+    //   playerDecks,
+    //   loggedIn: req.session.loggedIn,
+    // });
+    
+
+
+    res.send(JSON.stringify(dbCardData))
+
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+
 
 // GET one card
 router.get('/playerDecks/:id', async (req, res) => {
