@@ -33,4 +33,4 @@ PlayerDecks.init(
   }
 );
 
-module.export = PlayerDecks;
+module.exports = PlayerDecks;
