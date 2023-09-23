@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     const dbCardData = await Card.findAll();
 
     const cData = dbCardData.map(u => u.get({plain: true}))
-      
+    console.log(cData);
     res.render('homepage', {cData});
 
   } catch (err) {
