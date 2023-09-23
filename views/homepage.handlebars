@@ -87,23 +87,24 @@
                             {{#each cData}}
                             <div class="col-4">
                                 <div class="card" style="border: none;">
-                                    <img src="https://static.marvelsnap.pro/cards/{{cardDefImageID}}.webp" class="card-img"
-                                        alt="Image" style="max-width: 100%">
+                                    <img src="https://static.marvelsnap.pro/cards/{{cardDefImageID}}.webp"
+                                        class="card-img" alt="Image" style="max-width: 100%">
                                     <div class="card-body text-center">
                                         <h5 class="card-title">{{name}}</h5>
                                     </div>
-                                    <!-- Button to trigger the modal -->
+                                    <!-- Button to trigger the modal with a unique data-target attribute -->
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#imageModal">
+                                        data-target="#imageModal{{@index}}">
                                         Details
                                     </button>
                                 </div>
                             </div>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="imageModal" tabindex="-1" role="dialog"
-                                aria-labelledby="imageModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
+                            <!-- Modal with a dynamic id and data-index attribute -->
+                            <div class="modal fade" id="imageModal{{@index}}" data-index="{{@index}}" tabindex="-1"
+                                role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                <!-- Modal content as you have it -->
+                                <div class="modal-dialog modal-lg modal-horizontal" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -111,9 +112,24 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <!-- Your image here -->
-                                            <img src="https://static.marvelsnap.pro/cards/{{cardDefImageID}}.webp"
-                                                class="img-fluid" alt="Image">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="https://static.marvelsnap.pro/cards/{{cardDefImageID}}.webp"
+                                                        class="img-fluid" alt="Image">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="col-md-6">
+                                                        <h4>Overview</h4>
+                                                        <ul style="list-style-type: none; padding: 0;">
+                                                            <li><strong>Name:</strong> {{name}}</li>
+                                                            <li><strong>Cost:</strong> {{cost}}</li>
+                                                            <li><strong>Power:</strong> {{power}}</li>
+                                                            <li><strong>Ability:</strong> {{ability}}</li>
+                                                            <li><strong>Description:</strong> {{cardDescription}}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
@@ -123,6 +139,7 @@
                                 </div>
                             </div>
                             {{/each}}
+
 
                         </div>
                     </div>
@@ -134,3 +151,5 @@
         </div>
     </div>
 </div>
+
+<script src="/js/generateModal.js"></script>
