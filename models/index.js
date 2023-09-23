@@ -23,36 +23,8 @@ keys.forEach((key) => {
     cardDescription: CardsJson[key].description,
   };
 
-  dataEntires.push(dataEntry);
-});
 
-/* Deck.hasMany(Card, {
-  foreignKey: 'deck_id',
-}); */
 
-/* FeatureCard.belongsTo(Card, {
-  foreignKey: 'cardID',
-}); */
+module.exports = {Card,Players,Deck};
 
-/* Players.belongsTo(PlayerDecks, {
-  foreignKey: 'deckID',
-}); */
 
-/* Deck.belongsTo(PlayerDecks, {
-  foreignKey: 'deckID',
-}); */
-
-/* Card.alte({ force: fa })
-  .then(() => {
-    card = Card.bulkCreate(dataEntires);
-    // card.save()
-  })
-  .then(() => {
-    console.log('created new card');
-  })
-  .catch((err) => {
-    console.log(err);
-  }); */
-
-module.exports = { Card };
-module.exports = { Players, PlayerDecks, Card };
