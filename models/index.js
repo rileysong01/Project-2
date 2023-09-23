@@ -28,36 +28,7 @@ keys.forEach(((key) => {
   dataEntires.push(dataEntry)
 }))
 
-Deck.hasMany(Card, {
-  foreignKey: 'deck_id',
-});
-
-FeatureCard.belongsTo(Card, {
-  foreignKey: 'cardID',
-});
-
-Players.belongsTo(PlayerDecks, {
-  foreignKey: 'deckID',
-});
-
-Deck.belongsTo(PlayerDecks, {
-  foreignKey: 'deckID',
-});
 
 
+module.exports = {Card,Players,Deck};
 
-
-
-Card.sync({force:true}).then(() =>{
-  card = Card.bulkCreate(dataEntires)
-  // card.save()
-}).then(() =>{
-  console.log('created new card')
-}).catch((err) => {
-  console.log(err)
-})
-
-
-
-module.exports = {Card};
-module.exports = { Players, Deck, PlayerDecks, FeatureCard, Card };
