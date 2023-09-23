@@ -31,13 +31,6 @@ Account.hasOne(Players, { constraints: false })
 Players.hasMany(PlayerDecks,  { constraints: false } )
 Card.hasMany(PlayerDecks,  { constraints: false })
 
-// Card.hasMany
-
-// Players.belongsTo(Account,{ constraints: false } )
-
-// PlayerDecks.hasMany(Players, { constraints: false })
-// PlayerDecks.hasMany(Card, { constraints: false })
-
 
 
 Players.sync({alter:true})
