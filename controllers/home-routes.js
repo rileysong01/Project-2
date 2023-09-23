@@ -1,5 +1,12 @@
 const router = require('express').Router();
-const { Deck, Cards } = require('../models');
+const {
+  Card,
+  Category,
+  Deck,
+  Decks,
+  FeatureCard,
+  Players,
+} = require('../models');
 
 // GET all cards for the deck in the homepage
 router.get('/', async (req, res) => {
@@ -8,14 +15,14 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: Card,
-          attributes: ['filename', 'description'],
+          attributes: ['name', 'carddDescription'],
         },
       ],
     });
 
-    const deck = dbDeckData.map((gallery) => gallery.get({ plain: true }));
+    const deck = dbDeckData.map((deck) => deck.get({ plain: true }));
     res.render('homepage', {
-      galleries,
+      deck,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {
@@ -24,40 +31,27 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET one gallery
-router.get('/gallery/:id', async (req, res) => {
+// GET one card
+router.get('/deck/:id', async (req, res) => {
   try {
-    const dbGalleryData = await Gallery.findByPk(req.params.id, {
+    const dbDeckData = await Deck.findByPk(req.params.id, {
       include: [
         {
-          model: Painting,
+          model: Card,
           attributes: [
             'id',
-            'title',
-            'artist',
-            'exhibition_date',
-            'filename',
-            'description',
+            'name',
+            'cost',
+            'power',
+            'ability',
+            'cardDescription',
           ],
         },
       ],
     });
 
-    const gallery = dbGalleryData.get({ plain: true });
-    res.render('gallery', { gallery, loggedIn: req.session.loggedIn });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-// GET one painting
-router.get('/painting/:id', async (req, res) => {
-  try {
-    const dbPaintingData = await Painting.findByPk(req.params.id);
-
-    const painting = dbPaintingData.get({ plain: true });
-    res.render('painting', { painting, loggedIn: req.session.loggedIn });
+    const deck = dbDeckData.get({ plain: true });
+    res.render('deck', { deck, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

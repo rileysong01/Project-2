@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class FeatureCard extends Model {}
+class PlayerDecks extends Model {}
 
-FeatureCard.init(
+PlayerDecks.init(
   {
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
@@ -11,13 +11,17 @@ FeatureCard.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    cardID: {
+    deckID: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: 'card',
+        model: 'deck',
         key: 'id',
       },
+    },
+    deckName: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {
@@ -25,8 +29,8 @@ FeatureCard.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'featurecard',
+    modelName: 'playerdecks',
   }
 );
 
-module.exports = FeatureCard;
+module.export = PlayerDecks;
