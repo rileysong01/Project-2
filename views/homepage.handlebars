@@ -1,24 +1,176 @@
-<!-- Loop over each object in the projects array -->
-{{#each projects as |project| }}
-<div class="row mb-4 project">
-  <div class="col-md-5">
-    <h2>
-      <!-- Call helper function with triple brackets to render the emoji span as HTML -->
-      {{{get_emoji}}}
-      <a href="/project/{{project.id}}">{{project.name}}</a>
-    </h2>
-    <p>
-      <span for="img" aria-label="money">💲</span>
-      <!-- Pass needed_funding value to the helper function -->
-      <span class="dollar-amount">{{format_amount project.needed_funding}}</span>
-      needed!
-    </p>
-    <p>Created by {{project.user.name}} on {{format_date project.date_created}}</p>
-  </div>
-  <div class="col-md-7">
-    <p>
-      {{project.description}}
-    </p>
-  </div>
+<div class="mt-3">
+    <div class="row">
+        <!-- Left Side Block for Search and Filters -->
+        <div class="col-md-2 ml-4 p-0">
+            <!-- Create a form group to wrap the search input and button -->
+            <div class="form-group d-flex">
+                <!-- Search Form -->
+                <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </div>
+
+            <!-- Add the Filter by Category Dropdown -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Filter by Category
+                </button>
+                <div class="dropdown-menu" style="width: 200px;">
+                    <form>
+                        <div class="form-group">
+                            <label class="dropdown-item">
+                                <input type="checkbox" value="Category 1"> Category 1
+                            </label>
+                            <label class="dropdown-item">
+                                <input type="checkbox" value="Category 2"> Category 2
+                            </label>
+                            <label class="dropdown-item">
+                                <input type="checkbox" value="Category 3"> Category 3
+                            </label>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" id="applyFilters">Apply</button>
+                    </form>
+                </div>
+            </div>
+
+
+            <!-- Add the Filter by Location Dropdown -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Filter by Power
+                </button>
+                <div class="dropdown-menu" style="width: 200px;">
+                    <form>
+                        <div class="form-group">
+                            <label class="dropdown-item">
+                                <input type="checkbox" value="Category 1"> Power 1
+                            </label>
+                            <label class="dropdown-item">
+                                <input type="checkbox" value="Category 2"> Power 2
+                            </label>
+                            <label class="dropdown-item">
+                                <input type="checkbox" value="Category 3"> Power 3
+                            </label>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" id="applyFilters">Apply</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content (Content on the right side) -->
+        <div class="col-md-9">
+            <!-- Description Box -->
+            <div class="description-box">
+                <p>Description news letters and whatever <3 </p>
+            </div>
+            <div class="card mt-4">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="https://static.marvelsnap.pro/cards/AbsorbingMan.webp" class="card-img" alt="Image">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Card Title</h5>
+                            <p class="card-text">Details about the image go here.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="d-flex flex-wrap">
+
+
+                            <div class="col-4">
+                                <div class="card" style="border: none;">
+                                    <img src="https://static.marvelsnap.pro/cards/AbsorbingMan.webp" class="card-img"
+                                        alt="Image" style="max-width: 100%">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Image Title 2</h5>
+                                    </div>
+                                    <!-- Button to trigger the modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#imageModal">
+                                        Details
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="imageModal" tabindex="-1" role="dialog"
+                                aria-labelledby="imageModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="imageModalLabel">Image Title 2</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- Your image here -->
+                                            <img src="https://static.marvelsnap.pro/cards/AbsorbingMan.webp"
+                                                class="img-fluid" alt="Image">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-4">
+                                <div class="card" style="border: none;">
+                                    <img src="https://static.marvelsnap.pro/cards/AbsorbingMan.webp" class="card-img"
+                                        alt="Image" style="max-width: 100%">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Image Title 2</h5>
+                                    </div>
+                                    <!-- Button to trigger the modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#imageModal">
+                                        Details
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="imageModal" tabindex="-1" role="dialog"
+                                aria-labelledby="imageModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="imageModalLabel">Image Title 2</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- Your image here -->
+                                            <img src="https://static.marvelsnap.pro/cards/AbsorbingMan.webp"
+                                                class="img-fluid" alt="Image">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
 </div>
-{{/each}}
