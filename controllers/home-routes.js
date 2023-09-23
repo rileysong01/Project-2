@@ -44,10 +44,12 @@ router.get('/cards', async (req, res) => {
     const dbCardData = await Card.findAll();
     
     
+
     res.render('homepage', {
       playerDecks,
       loggedIn: req.session.loggedIn,
     });
+
     
 
 
