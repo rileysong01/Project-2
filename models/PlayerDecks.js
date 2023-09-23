@@ -19,6 +19,13 @@ PlayerDecks.init(
         key: 'id', 
       }, */
     },
+    players_id:{
+      type:DataTypes.INTEGER,
+      references:{
+        model:'players',
+        key:'id'
+      }
+    },
     deckName: {
       type: DataTypes.STRING,
       allowNull: false,
