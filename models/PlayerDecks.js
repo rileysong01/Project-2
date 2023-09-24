@@ -17,7 +17,14 @@ PlayerDecks.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+
+    deckCards: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+
   },
+
   {
     sequelize,
     timestamps: false,
