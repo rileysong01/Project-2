@@ -10,7 +10,7 @@ const {
 } = require('../models');
 
 
-router.get('/deckbuild', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
       const dbCardData = await Card.findAll();
   
@@ -24,11 +24,12 @@ router.get('/deckbuild', async (req, res) => {
     }
 });
 
-router.post('/addDeck', async (req, res) =>{
+router.post('/', async (req, res) =>{
     
     //if logged in 
     try{
         console.log(req.body)
+        // username?, deck_name, array of card ids 
 
     }catch (err){
         console.error(err);
@@ -38,17 +39,17 @@ router.post('/addDeck', async (req, res) =>{
 
 })
 
-router.get('/getDeck', async (req, res) =>{
+// router.get('/getDeck', async (req, res) =>{
     
-    //if logged in 
-    try{
-        console.log(req.body)
+//     //if logged in 
+//     try{
+//         console.log(req.body)
 
-    }catch (err){
-        console.error(err);
-    }
+//     }catch (err){
+//         console.error(err);
+//     }
 
-})
+// })
 
 
 module.exports = router;
