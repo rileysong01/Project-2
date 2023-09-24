@@ -11,6 +11,8 @@ PlayerDecks.init(
       autoIncrement: true,
       primaryKey: true,
     },
+
+
     deckName: {
       type: DataTypes.STRING,
       allowNull: false,
