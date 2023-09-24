@@ -83,19 +83,19 @@
                                 <!-- Image items (each 100px wide) -->
                                 <div class="image-item">
                                     <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 1"
-                                        width="225">
+                                        width="100">
                                 </div>
                                 <div class="image-item">
                                     <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 2"
-                                        width="225">
+                                        width="100">
                                 </div>
                                 <div class="image-item">
                                     <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 2"
-                                        width="225">
+                                        width="100">
                                 </div>
                                 <div class="image-item">
                                     <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 2"
-                                        width="225">
+                                        width="100">
                                 </div>
                             </div>
                         </div>
@@ -116,63 +116,20 @@
                     <div class="row">
                         <div class="col">
                             <div class="d-flex flex-wrap">
+
+                                {{#each cData}}
                                 <div class="col-4">
                                     <div class="card" style="border: none; position: relative;">
-                                        <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" class="card-img" alt="Image" style="max-width: 100%">
+                                        <img src="https://static.marvelsnap.pro/cards/{{cardDefImageID}}.webp" class="card-img" alt="Image" style="max-width: 100%">
                                         <div class="card-body text-center">
-                                            <h5 class="card-title">Image Title 2</h5>
+                                            <h5 class="card-title">{{name}}</h5>
                                             <a href="#" class="add-to-deck-button">Add to Deck</a>
                                         </div>
                                     </div>
                                 </div>
+                                {{/each}}
                                 
                                 
-                
-                                <div class="col-4"> 
-                                    <div class="card" style = "border: none;">
-                                        <img src="https://static.marvelsnap.pro/cards/AbsorbingMan.webp" class="card-img" alt="Image" style="max-width: 100%">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">Image Title 2</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                
-                                <div class="col-4"> <!-- Each card should have col-4 to fit 3 cards in a row on a large screen -->
-                                    <div class="card" style = "border: none;">
-                                        <img src="https://static.marvelsnap.pro/cards/AbsorbingMan.webp" class="card-img" alt="Image" style="max-width: 100%">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">Image Title 2</h5>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-4"> <!-- Each card should have col-4 to fit 3 cards in a row on a large screen -->
-                                    <div class="card" style = "border: none;">
-                                        <img src="https://static.marvelsnap.pro/cards/AbsorbingMan.webp" class="card-img" alt="Image" style="max-width: 100%">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">Image Title 2</h5>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-4"> <!-- Each card should have col-4 to fit 3 cards in a row on a large screen -->
-                                    <div class="card" style = "border: none;">
-                                        <img src="https://static.marvelsnap.pro/cards/AbsorbingMan.webp" class="card-img" alt="Image" style="max-width: 100%">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">Image Title 2</h5>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-4"> <!-- Each card should have col-4 to fit 3 cards in a row on a large screen -->
-                                    <div class="card" style = "border: none;">
-                                        <img src="https://static.marvelsnap.pro/cards/AbsorbingMan.webp" class="card-img" alt="Image" style="max-width: 100%">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">Image Title 2</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Repeat the structure for other images -->
                             </div>
                         </div>
                     </div>
