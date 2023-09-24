@@ -28,7 +28,7 @@ const Account = require('./Account')
 
 Account.hasOne(Players, { constraints: false })
 
-// Players.hasMany(PlayerDecks,  { constraints: false } )
+Players.hasMany(PlayerDecks,  { constraints: false } )
 // Card.hasMany(PlayerDecks,  { constraints: false })
 
 
@@ -36,6 +36,6 @@ Account.hasOne(Players, { constraints: false })
 Players.sync({alter:true})
 PlayerDecks.sync({alter:true})
 Account.sync({alter:true})
-Card.sync({alter:true})
+// Card.sync({alter:true})
 
 module.exports = {Card,PlayerDecks,Players,Account};
