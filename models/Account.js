@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Players extends Model {}
+class Account extends Model {}
 
-Players.init(
+Account.init(
   {
     id: {
       type: DataTypes.INTEGER, //why not INTEGER??
@@ -11,17 +11,13 @@ Players.init(
       primaryKey: true,
       autoIncrement:true
     },
-    username: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    deckID: {
-      type: DataTypes.INTEGER,
+    password: {
+      type: DataTypes.STRING,
       allowNull: false,
-      /* references: {
-        model: 'decks',
-        key: 'id',
-      }, */
     },
   },
   {
@@ -29,8 +25,8 @@ Players.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'players',
+    modelName: 'accounts',
   }
 );
 
-module.exports = Players;
+module.exports = Account;

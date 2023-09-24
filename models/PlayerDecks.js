@@ -6,26 +6,13 @@ class PlayerDecks extends Model {}
 PlayerDecks.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.BIGINT.UNSIGNED,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
     },
-    deckID: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      /* references: {
-        model: 'deck',
-        key: 'id', 
-      }, */
-    },
-    players_id:{
-      type:DataTypes.INTEGER,
-      references:{
-        model:'players',
-        key:'id'
-      }
-    },
+
+
     deckName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -39,5 +26,23 @@ PlayerDecks.init(
     modelName: 'playerdecks',
   }
 );
+
+
+// playerID: {
+//   type: DataTypes.BIGINT,
+//   allowNull: false,
+//   /* references: {
+//     model: 'deck',
+//     key: 'id', 
+//   }, */
+// },
+// deckID: {
+//   type: DataTypes.BIGINT,
+//   allowNull: false,
+//   /* references: {
+//     model: 'deck',
+//     key: 'id', 
+//   }, */
+// },
 
 module.exports = PlayerDecks;
