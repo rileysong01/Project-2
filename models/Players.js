@@ -15,14 +15,6 @@ Players.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    deckID: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      /* references: {
-        model: 'decks',
-        key: 'id',
-      }, */
-    },
   },
   {
     sequelize,
