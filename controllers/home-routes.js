@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const { response } = require('express');
+
+
 const {
   Card,
   /* Category, */
@@ -77,4 +79,4 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-module.exports = router;
+module.exports = router 
