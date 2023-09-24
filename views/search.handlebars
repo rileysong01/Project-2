@@ -1,0 +1,175 @@
+<div class="mt-3">
+    <div class="row">
+        <!-- Left Side Block for Search and Filters -->
+        <div class="col-md-2 ml-4 p-0">
+            <!-- Create a form group to wrap the search input and button -->
+            <div class="form-group d-flex">
+                <!-- Search Form -->
+                <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </div>
+
+            <!-- Add the Filter by Category Dropdown -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Filter by Power
+                </button>
+                <div class="dropdown-menu" style="width: 200px;">
+                    <form>
+                        <div class="form-group">
+                            <label class="dropdown-item">
+                                <input type="checkbox" value="Category 1"> Category 1
+                            </label>
+                            <label class="dropdown-item">
+                                <input type="checkbox" value="Category 2"> Category 2
+                            </label>
+                            <label class="dropdown-item">
+                                <input type="checkbox" value="Category 3"> Category 3
+                            </label>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" id="applyFilters">Apply</button>
+                    </form>
+                </div>
+            </div>
+
+
+            <!-- Add the Filter by Power Slidebar -->
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12">
+                        <h4>Filter by Range</h4>
+                        <div class="form-group">
+                            <label for="rangeSlider">Select Range:</label>
+                            <input type="range" class="custom-range" id="rangeSlider">
+                            <div class="d-flex justify-content-between">
+                                <span id="minValue">Min: 0</span>
+                                <span id="maxValue">Max: 100</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+    <!-- Main Content (Content on the right side) -->
+    <div class="col-md-9">
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex flex-wrap">
+
+
+                        {{#each cData}}
+                        <div class="col-4">
+                            <div class="card" style="border: none;">
+                                <img src="https://static.marvelsnap.pro/cards/{{cardDefImageID}}.webp" class="card-img"
+                                    alt="Image" style="max-width: 100%">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{name}}</h5>
+                                </div>
+                                <!-- Button to trigger the modal with a unique data-target attribute -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#imageModal{{@index}}">
+                                    Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Modal with a dynamic id and data-index attribute -->
+                        <div class="modal fade" id="imageModal{{@index}}" data-index="{{@index}}" tabindex="-1"
+                            role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                            <!-- Modal content as you have it -->
+                            <div class="modal-dialog modal-lg modal-horizontal" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <img src="https://static.marvelsnap.pro/cards/{{cardDefImageID}}.webp"
+                                                    class="img-fluid" alt="Image">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="col-md-6">
+                                                    <h4>Overview</h4>
+                                                    <ul style="list-style-type: none; padding: 0;">
+                                                        <li><strong>Name:</strong> {{name}}</li>
+                                                        <li><strong>Cost:</strong> {{cost}}</li>
+                                                        <li><strong>Power:</strong> {{power}}</li>
+                                                        <li><strong>Ability:</strong> {{ability}}</li>
+                                                        <li><strong>Description:</strong> {{cardDescription}}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+</div>
+
+<script src="/js/generateModal.js"></script>
+<script src="/js/search.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const minPowerElement = document.getElementById('minPower');
+        const maxPowerElement = document.getElementById('maxPower');
+        const powerRange = document.getElementById('powerRange');
+        const powerLabel = document.getElementById('powerLabel');
+
+        // Initialize the values for the min and max power.
+        let minPower = parseInt(powerRange.min);
+        let maxPower = parseInt(powerRange.max);
+
+        // Update the labels and power values when the input value changes.
+        powerRange.addEventListener('input', () => {
+            const currentMinPower = parseInt(powerRange.value.split(',')[0]);
+            const currentMaxPower = parseInt(powerRange.value.split(',')[1]);
+
+            // Update the labels and power values.
+            minPowerElement.textContent = currentMinPower;
+            maxPowerElement.textContent = currentMaxPower;
+            powerLabel.textContent = `Power Range: ${currentMinPower} - ${currentMaxPower}`;
+
+            // Update the minPower and maxPower variables.
+            minPower = currentMinPower;
+            maxPower = currentMaxPower;
+        });
+
+        // Optionally, you can also add an event listener to handle applying the filter.
+        const applyFiltersButton = document.getElementById('applyFilters');
+        applyFiltersButton.addEventListener('click', () => {
+            // Implement filtering logic here based on the selected power range (minPower and maxPower).
+            console.log(`Filter by Power Range: ${minPower} - ${maxPower}`);
+        });
+    });
+</script>
