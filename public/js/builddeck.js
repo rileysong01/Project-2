@@ -12,20 +12,14 @@ document.addEventListener('DOMContentLoaded', function () {
             // Clone the clicked card
             const clonedCard = card.cloneNode(true);
 
-            // Create a new div element with the 'image-item' class
             const imageItemDiv = document.createElement('div');
             imageItemDiv.className = 'image-item';
-
-            // Copy the image and attributes from the cloned card to the new div
             const cardImage = clonedCard.querySelector('img');
 
-            // Set the 'width' style to '100%' instead of 'max-width: 100%'
-            cardImage.style.width = '175px';
+            cardImage.style.width = '150px';
 
             const imageClone = cardImage.cloneNode(true);
             imageItemDiv.appendChild(imageClone);
-
-            // Append the new div (with image) to the top section
             topSection.appendChild(imageItemDiv);
 
             // Remove the clicked card from the cData picture pool
@@ -33,4 +27,44 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const deleteDeckButton = document.getElementById('deleteDeck');
+    const saveDeckButton = document.getElementById('saveDeck');
+
+    // Function to check if the top section is empty
+    function isTopSectionEmpty() {
+        const topSection = document.querySelector('.top-section');
+        return topSection.childElementCount === 0;
+    }
+
+    // Function to toggle button visibility
+    function toggleButtonVisibility() {
+        if (isTopSectionEmpty()) {
+            deleteDeckButton.style.display = 'none';
+            saveDeckButton.style.display = 'none';
+        } else {
+            deleteDeckButton.style.display = 'block';
+            saveDeckButton.style.display = 'block';
+        }
+    }
+
+
+    deleteDeckButton.addEventListener('click', function () {
+        location.reload();
+    });
+
+    toggleButtonVisibility();
+
+    const topSectionObserver = new MutationObserver(function () {
+        toggleButtonVisibility();
+    });
+
+    const topSection = document.querySelector('.top-section');
+    topSectionObserver.observe(topSection, { childList: true });
+});
+
 
