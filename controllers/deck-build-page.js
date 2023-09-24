@@ -16,10 +16,39 @@ router.get('/deckbuild', async (req, res) => {
   
       const cData = dbCardData.map(u => u.get({plain: true}))
      
-      res.render('homepage', {cData});
+      res.render('buildDeck', {cData});
   
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
     }
-  });
+});
+
+router.post('/addDeck', async (req, res) =>{
+    
+    //if logged in 
+    try{
+        console.log(req.body)
+
+    }catch (err){
+        console.error(err);
+    }
+
+    res.json(req.body)
+
+})
+
+router.get('/getDeck', async (req, res) =>{
+    
+    //if logged in 
+    try{
+        console.log(req.body)
+
+    }catch (err){
+        console.error(err);
+    }
+
+})
+
+
+module.exports = router;
