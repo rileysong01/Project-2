@@ -52,10 +52,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-
+    // Refresh page when delete button is clicked
     deleteDeckButton.addEventListener('click', function () {
         location.reload();
     });
+
+    // Pass data to backend when save deck button is clicked
+    saveDeckButton.addEventListener('click', function (){
+
+    })
 
     toggleButtonVisibility();
 
