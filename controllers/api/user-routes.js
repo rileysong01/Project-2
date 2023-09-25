@@ -56,9 +56,9 @@ router.post('/', (req, res) => {
 });
 
 // Login
-router.post('/login', async (req, res) => {
-  
-    Players.findOne({
+router.post('/login', (req, res) => {
+    
+  Players.findOne({
       where: {
         username: req.body.username,
       },
@@ -93,12 +93,12 @@ router.post('/login', async (req, res) => {
         .json({ user: udb, message: 'You are now logged in!' });
         console.log(req.session)
       });
-    })
-    
-    .catch(err => {
+    }).catch(err => {
     console.log(err);
     res.status(500).json(err);
     })
+
+
 });
 
 // Logout
