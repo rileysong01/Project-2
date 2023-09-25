@@ -33,4 +33,6 @@ PlayerDecks.sync();
 Account.sync();
 Card.sync();
 
+
 module.exports = { Card, PlayerDecks, Players, Account };
+
