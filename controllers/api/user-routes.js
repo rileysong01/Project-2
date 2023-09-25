@@ -48,16 +48,13 @@ router.post('/login', async (req, res) => {
 
     req.session.save(() => {
       req.session.loggedIn = true;
-      console.log(
-        'File: user-routes.js ~ line 57 ~ req.session.save ~ req.session.cookie',
-        // NEED TO SAVE USERID
-        req.session.cookie
-      );
-
       res
-        .status(200)
-        .json({ user: dbUserData, message: 'You are now logged in!' });
+      .status(200)
+      .json({ user: dbUserData, message: 'You are now logged in!' });
+
     });
+
+      console.log(req.session)
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
