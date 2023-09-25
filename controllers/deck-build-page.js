@@ -11,6 +11,7 @@ const {
   Players,
 } = require('../models');
 const { route } = require('./api');
+const { json } = require('sequelize');
 
 
 router.get('/', async (req, res) => {
