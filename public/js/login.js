@@ -1,10 +1,10 @@
 // Handle login form submission
-$('#loginForm').submit(async function (event) {
+document.getElementById('loginForm').addEventListener('submit', async function (event) {
   event.preventDefault(); // Prevent the default form submission
   console.log('Hello');
   // Get input values
-  const username = $('#loginUsername').val();
-  const password = $('#loginPassword').val();
+  const username = document.getElementById('loginUsername').value;
+  const password = document.getElementById('loginPassword').value;
 
   if (username && password) {
     try {
@@ -13,10 +13,22 @@ $('#loginForm').submit(async function (event) {
         body: JSON.stringify({ username, password }),
         headers: { 'Content-Type': 'application/json' },
       });
+      function myFunction() {
+        console.log('This function is executed every 1 second.');
+      }
+
+      const intervalId = setInterval(myFunction, 1000);
+
 
       if (response.ok) {
+        setTimeout(() => {
+          clearInterval(intervalId);
+          console.log('Interval cleared.');
+        }, 5000);
         document.location.replace('/');
+        console.log('good');
       } else {
+        console.log(response);
         alert(response.statusText);
       }
     } catch (error) {
@@ -26,12 +38,12 @@ $('#loginForm').submit(async function (event) {
   }
 });
 
-$('#signupForm').submit(async function (event) {
+document.getElementById('signupForm').addEventListener('submit', async function (event) {
   event.preventDefault();
 
-  var username = $('#signupUsername').val();
-  var email = $('#signupEmail').val();
-  var password = $('#signupPassword').val();
+  var username = document.getElementById('signupUsername').value;
+  var email = document.getElementById('signupEmail').value;
+  var password = document.getElementById('signupPassword').value;
 
   if (username && email && password) {
     const response = await fetch('/api/user', {
@@ -41,7 +53,7 @@ $('#signupForm').submit(async function (event) {
     });
 
     if (response.ok) {
-      document.location.replace('/profile');
+      window.location.replace('/profile');
     } else {
       alert(response.statusText);
     }

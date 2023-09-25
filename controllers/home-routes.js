@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { response } = require('express');
+
 const withAuth = require('../utils/auth');
 
 const {
@@ -16,7 +16,10 @@ router.get('/',async (req, res) => {
     const dbCardData = await Card.findAll();
 
     const cData = dbCardData.map((u) => u.get({ plain: true }));
-    console.log(cData);
+    console.log(req.session.loggedIn, '<----------- login')
+    // for (i=0; i<10000; i++) {
+
+    // }
     res.render('homepage', { cData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);

@@ -47,5 +47,16 @@ header, .project:not(:last-child) {
   .card:hover .add-to-deck-button {
     opacity: 1; /* Visible on hover */
   }
+
+
+  .navbar a:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease-in-out;
+  }
   
-  
+  body {
+    font-family: 'Orbitron', sans-serif;
+}
+.navbar a {
+  text-shadow: 0 0 10px #00ff00; /* Neon green glow */
+}
