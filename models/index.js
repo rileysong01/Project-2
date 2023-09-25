@@ -36,6 +36,6 @@ Players.hasMany(PlayerDecks,  { constraints: false } )
 Players.sync({alter:true})
 PlayerDecks.sync({alter:true})
 Account.sync({alter:true})
-Card.sync({alter:true})
+// Card.sync({alter:true})
 
 module.exports = {Card,PlayerDecks,Players,Account};

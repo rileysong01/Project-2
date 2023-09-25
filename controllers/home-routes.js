@@ -24,6 +24,7 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
+
 router.get('/cards', async (req, res) => {
   try {
     const dbCardData = await Card.findAll();
