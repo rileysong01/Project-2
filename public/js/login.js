@@ -1,21 +1,21 @@
- // Handle login form submission
- $("#loginForm").submit(async function(event) {
+// Handle login form submission
+$('#loginForm').submit(async function (event) {
   event.preventDefault(); // Prevent the default form submission
-
+  console.log('Hello');
   // Get input values
-  const username = $("#loginUsername").val();
-  const password = $("#loginPassword").val();
+  const username = $('#loginUsername').val();
+  const password = $('#loginPassword').val();
 
   if (username && password) {
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch('/api/user/login', {
         method: 'POST',
         body: JSON.stringify({ username, password }),
         headers: { 'Content-Type': 'application/json' },
       });
 
       if (response.ok) {
-        document.location.replace('/homepage');
+        document.location.replace('/');
       } else {
         alert(response.statusText);
       }
@@ -26,15 +26,15 @@
   }
 });
 
-$("#signupForm").submit(async function(event) {
+$('#signupForm').submit(async function (event) {
   event.preventDefault();
 
-  var signupUsername = $("#signupUsername").val();
-  var signupEmail = $("#signupEmail").val();
-  var signupPassword = $("#signupPassword").val();
+  var username = $('#signupUsername').val();
+  var email = $('#signupEmail').val();
+  var password = $('#signupPassword').val();
 
-  if (signupUsername && signupEmail && signupPassword) {
-    const response = await fetch('/api/signup', {
+  if (username && email && password) {
+    const response = await fetch('/api/user', {
       method: 'POST',
       body: JSON.stringify({ username, email, password }),
       headers: { 'Content-Type': 'application/json' },
@@ -46,4 +46,4 @@ $("#signupForm").submit(async function(event) {
       alert(response.statusText);
     }
   }
-})
+});
