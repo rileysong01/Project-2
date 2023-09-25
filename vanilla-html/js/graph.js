@@ -4,7 +4,7 @@ const data = {
   labels: '123456',
   datasets: [{
     label: 'Card Distrabution',
-    data: [6, 5, 2,2,5,3],
+    data: [12, 5, 2,2,5,3],
     backgroundColor: [
       'rgba(255, 99, 132, 0.2)',
       'rgba(255, 159, 64, 0.2)',
