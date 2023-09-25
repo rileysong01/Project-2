@@ -28,7 +28,7 @@ const Account = require('./Account')
 
 Account.hasOne(Players, { constraints: false })
 
-// Players.hasMany(PlayerDecks,  { constraints: false } )
+Players.hasMany(PlayerDecks,  { constraints: false } )
 // Card.hasMany(PlayerDecks,  { constraints: false })
 
 
