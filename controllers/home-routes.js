@@ -17,7 +17,7 @@ router.get('/', withAuth, async (req, res) => {
 
     const cData = dbCardData.map((u) => u.get({ plain: true }));
     console.log(cData);
-    res.render('homepage', { cData });
+    res.render('homepage', { cData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

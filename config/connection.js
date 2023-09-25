@@ -1,4 +1,4 @@
-/* const Sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 require('dotenv').config();
 
 const sequelize = new Sequelize(
@@ -26,9 +26,9 @@ try {
   console.error('Unable to connect to the database:', error);
 }
 
-module.exports = sequelize; */
+module.exports = sequelize;
 
-const Sequelize = require('sequelize');
+/* const Sequelize = require('sequelize');
 require('dotenv').config();
 
 const sequelize = new Sequelize(
@@ -42,4 +42,4 @@ const sequelize = new Sequelize(
   }
 );
 
-module.exports = sequelize;
+module.exports = sequelize; */
