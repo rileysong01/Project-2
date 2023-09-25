@@ -14,12 +14,7 @@ const {
 router.get('/', async (req, res) => {
   try {
     
-    fliter = req.query
-
-    sqlFilter
-
-    fliter.foreach(ele)
-
+  
     res.render('searchpage');
 
   } catch (err) {
