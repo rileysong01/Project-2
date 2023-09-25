@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             console.log(cardIDs);
 
-            const response = await fetch('/api/users/login', {
+            const response = await fetch('/deckbuild', {
                 method: 'POST',
                 body: JSON.stringify({ cardIDs, deckName }),
                 headers: { 'Content-Type': 'application/json' },
@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
           
               if (response.ok) {
                 document.location.replace('/deckbuild');
+                alert('saved')
               } else {
                 alert(response.statusText);
               }
