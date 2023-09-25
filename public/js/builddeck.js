@@ -8,7 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Loop through each card and add a click event listener
     cardElements.forEach(function (card) {
-        card.addEventListener('click', function () {
+        card.addEventListener('click', function (event) {
+
+            event.preventDefault();
+
             // Clone the clicked card
             const clonedCard = card.cloneNode(true);
             console.log(clonedCard)
