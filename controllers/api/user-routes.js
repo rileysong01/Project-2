@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Players } = require('../../models');
 
 // CREATE new user
+/**
 router.post('/', async (req, res) => {
   try {
     const dbUserData = await Players.create({
@@ -10,55 +11,94 @@ router.post('/', async (req, res) => {
       password: req.body.password,
     });
 
+    
+    playerID = dbUserData.dataValues.id;
+    
+    
+
     req.session.save(() => {
       req.session.loggedIn = true;
+      req.session.playerid = playerID;
       // NEED TO ALSO SAVE USERID in cookie session!!
       res.status(200).json(dbUserData);
     });
+    console.log(req.session)
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
+**/
+
+router.post('/', (req, res) => {
+  
+    Players.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+    }).then(userData => {
+      req.session.save(() => {
+      
+        req.session.loggedIn = true;
+        req.session.playerid = userData.dataValues.id;
+        
+  
+        
+        // NEED TO ALSO SAVE USERID in cookie session!!
+        res.status(200).json(userData);
+      });
+      console.log(req.session)
+    }).catch(err =>  {
+      console.log('Error on post method user -> ',err);
+      res.status(500).json(err);
+    })
+});
+
 // Login
 router.post('/login', async (req, res) => {
-  try {
-    const dbUserData = await Players.findOne({
+  
+    Players.findOne({
       where: {
         username: req.body.username,
       },
-    });
-
-    if (!dbUserData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
-      return;
-    }
-
-    const validPassword = await dbUserData.checkPassword(req.body.password);
-
-    if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
-      return;
-    }
-
-    req.session.save(() => {
-      req.session.loggedIn = true;
-      res
-      .status(200)
-      .json({ user: dbUserData, message: 'You are now logged in!' });
-
-    });
-
-      console.log(req.session)
-  } catch (err) {
+    }).then(userData =>{
+      if(userData){
+        playerID = userData.dataValues.id;
+      }
+  
+      if (!userData) {
+        res
+          .status(400)
+          .json({ message: 'Incorrect email or password. Please try again!' });
+        return;
+      }
+  
+      return userData.checkPassword(req.body.password);
+    }).then(udb => {
+    
+  
+      if (!udb) {
+        res
+          .status(400)
+          .json({ message: 'Incorrect email or password. Please try again!' });
+        return;
+      }
+  
+      req.session.save(() => {
+        req.session.loggedIn = true;
+        req.session.playerid = playerID;
+        res
+        .status(200)
+        .json({ user: udb, message: 'You are now logged in!' });
+        console.log(req.session)
+      });
+    })
+    
+    .catch(err => {
     console.log(err);
     res.status(500).json(err);
-  }
+    })
 });
 
 // Logout

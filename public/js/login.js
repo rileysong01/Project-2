@@ -21,12 +21,11 @@ document.getElementById('loginForm').addEventListener('submit', async function (
 
 
       if (response.ok) {
-        setTimeout(() => {
-          clearInterval(intervalId);
-          console.log('Interval cleared.');
-        }, 5000);
+        // window.setTimeout(function () {
+        //   document.location.replace('/');
+        // }, 1000);
+        // document.location.replace('/');
         document.location.replace('/');
-        console.log('good');
       } else {
         console.log(response);
         alert(response.statusText);
@@ -51,9 +50,20 @@ document.getElementById('signupForm').addEventListener('submit', async function 
       body: JSON.stringify({ username, email, password }),
       headers: { 'Content-Type': 'application/json' },
     });
+    
+  
+    console.log('first response --> ',response)
 
     if (response.ok) {
-      window.location.replace('/profile');
+      window.location.replace('/');
+      
+      
+      // window.setTimeout(function () {
+      //   window.location.replace('/');
+      // }, 2000);
+
+      
+      
     } else {
       alert(response.statusText);
     }
