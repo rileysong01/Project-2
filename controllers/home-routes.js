@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { response } = require('express');
-
+const withAuth = require('../utils/auth');
 
 const {
   Card,
@@ -11,39 +11,30 @@ const {
   Players,
 } = require('../models');
 
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   try {
     const dbCardData = await Card.findAll();
 
-    const cData = dbCardData.map(u => u.get({plain: true}))
+    const cData = dbCardData.map((u) => u.get({ plain: true }));
     console.log(cData);
-    res.render('homepage', {cData});
-
+    res.render('homepage', { cData });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
-
-
 
 
 router.get('/cards', async (req, res) => {
   try {
-    
     const dbCardData = await Card.findAll();
-    
-    
-    res.send(JSON.stringify(dbCardData))
 
-
+    res.send(JSON.stringify(dbCardData));
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
-
-
 
 // GET one card
 router.get('/playerDecks/:id', async (req, res) => {
@@ -81,4 +72,4 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-module.exports = router 
+module.exports = router;

@@ -104,10 +104,15 @@ router.get('/search/decks/:username', async (req, res) => {
 
 router.post('/', async (req, res) =>{
     
-    //if logged in 
+    //if logged in s
     try{
-        console.log(req.body)
+        
+        let deckName = req.body.deckName
+        // console.log(JSON.stringify(req.body.cardIDs))
+        let cardIDS = JSON.stringify(req.body.cardIDs)
         // username?, deck_name, array of card ids 
+       PlayerDecks.create({deckName: deckName, deckCards: cardIDS})
+        
 
     }catch (err){
         console.error(err);
