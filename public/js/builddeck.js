@@ -11,9 +11,13 @@ document.addEventListener('DOMContentLoaded', function () {
         card.addEventListener('click', function () {
             // Clone the clicked card
             const clonedCard = card.cloneNode(true);
+            console.log(clonedCard)
 
             const imageItemDiv = document.createElement('div');
             imageItemDiv.className = 'image-item';
+            const id = clonedCard.getAttribute('data-cardid');
+            imageItemDiv.dataset.cardid = id;
+            console.log(id);
             const cardImage = clonedCard.querySelector('img');
 
             cardImage.style.width = '150px';
@@ -52,10 +56,42 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-
+    // Refresh page when delete button is clicked
     deleteDeckButton.addEventListener('click', function () {
         location.reload();
     });
+
+    // Pass data to backend when save deck button is clicked
+    saveDeckButton.addEventListener('click', async function (){
+        const topSection = document.querySelector('.top-section');
+        const deckName = (document.getElementById('teamNameInput')).value;
+
+        console.log(topSection.children)
+        console.log(topSection.children.length)
+        if (topSection.children.length < 12) {
+            alert('need to have 12 cards')
+        } else if (topSection.children.length > 12) {
+            alert('cannot exceed 12 cards')
+        } else if (topSection.children.length === 12 && deckName) {
+            const cardIDs = [];
+            for (let i=0; i < topSection.children.length; i++) {
+                cardIDs.push(parseInt(topSection.children[i].getAttribute('data-cardid')))
+            }
+            console.log(cardIDs);
+
+            const response = await fetch('/api/users/login', {
+                method: 'POST',
+                body: JSON.stringify({ cardIDs, deckName }),
+                headers: { 'Content-Type': 'application/json' },
+              });
+          
+              if (response.ok) {
+                document.location.replace('/deckbuild');
+              } else {
+                alert(response.statusText);
+              }
+        }
+    })
 
     toggleButtonVisibility();
 
