@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
 
     req.session.save(() => {
       req.session.loggedIn = true;
-
+      // NEED TO ALSO SAVE USERID in cookie session!!
       res.status(200).json(dbUserData);
     });
   } catch (err) {
@@ -50,6 +50,7 @@ router.post('/login', async (req, res) => {
       req.session.loggedIn = true;
       console.log(
         'File: user-routes.js ~ line 57 ~ req.session.save ~ req.session.cookie',
+        // NEED TO SAVE USERID
         req.session.cookie
       );
 

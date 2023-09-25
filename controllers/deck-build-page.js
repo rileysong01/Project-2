@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
   
       const cData = dbCardData.map(u => u.get({plain: true}))
      
+      console.log(cData)
       res.render('buildDeck', {cData});
   
     } catch (err) {
