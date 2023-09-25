@@ -10,9 +10,11 @@ const {
   /* FeatureCard, */
   Players,
 } = require('../models');
+const { route } = require('./api');
 
 
 router.get('/', async (req, res) => {
+    console.log(req.query)
     try {
       const dbCardData = await Card.findAll();
   
@@ -115,6 +117,9 @@ router.post('/', async (req, res) =>{
 })
 
 
+router.get('/redir', async (req, res) => {
+    res.redirect('/deckbuild?id=1,2,3,4,5,6');
+})
 
 
 // router.get('/getDeck', async (req, res) =>{
