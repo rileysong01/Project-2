@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const { Players } = require('../../models');
 
-// CREATE new user
+// CREATE new Player
 router.post('/', async (req, res) => {
   try {
-    const dbUserData = await Players.create({
+    const dbPlayersData = await Players.create({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
 
-      res.status(200).json(dbUserData);
+      res.status(200).json(dbPlayersData);
     });
   } catch (err) {
     console.log(err);
@@ -24,20 +24,20 @@ router.post('/', async (req, res) => {
 // Login
 router.post('/login', async (req, res) => {
   try {
-    const dbUserData = await Players.findOne({
+    const dbPlayersData = await Players.findOne({
       where: {
-        username: req.body.username,
+        email: req.body.email,
       },
     });
 
-    if (!dbUserData) {
+    if (!dbPlayersData) {
       res
         .status(400)
         .json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
 
-    const validPassword = await dbUserData.checkPassword(req.body.password);
+    const validPassword = await dbPlayersData.checkPassword(req.body.password);
 
     if (!validPassword) {
       res
@@ -49,13 +49,13 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
       console.log(
-        'File: user-routes.js ~ line 57 ~ req.session.save ~ req.session.cookie',
+        'File: Players-routes.js ~ line 57 ~ req.session.save ~ req.session.cookie',
         req.session.cookie
       );
 
       res
         .status(200)
-        .json({ user: dbUserData, message: 'You are now logged in!' });
+        .json({ players: dbPlayersData, message: 'You are now logged in!' });
     });
   } catch (err) {
     console.log(err);

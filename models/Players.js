@@ -1,7 +1,11 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-
-class Players extends Model {}
+const bcrypt = require('bcrypt');
+class Players extends Model {
+  checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.password);
+  }
+}
 
 Players.init(
   {
@@ -9,14 +13,24 @@ Players.init(
       type: DataTypes.INTEGER, //why not INTEGER??
       allowNull: false,
       primaryKey: true,
-      autoIncrement:true
+      autoIncrement: true,
     },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
+    hooks: {
+      async beforeCreate(newUserData) {
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        return newUserData;
+      },
+    },
     sequelize,
     timestamps: false,
     freezeTableName: true,
