@@ -1,136 +1,142 @@
-    <!-- Logged in Nav bar-->
-    <nav class="navbar navbar-light bg-light">
-        <div class="container">
-            <div class="d-flex justify-content-between w-100">
-                <a class="nav-link" href="#"> Build Deck </a>
-                <a class="nav-link" href="#"> View My Decks</a>
-                <a class="nav-link" href="#">Featured Decks</a>
+<!-- Logged in Nav bar-->
+<nav class="navbar navbar-light bg-light">
+    <div class="container">
+        <div class="d-flex justify-content-between w-100">
+            <a class="nav-link" href="#"> Build Deck </a>
+            <a class="nav-link" href="#"> View My Decks</a>
+            <a class="nav-link" href="#">Featured Decks</a>
+        </div>
+    </div>
+</nav>
+
+
+
+<div class="mt-3">
+    <div class="row">
+        <!-- Left Side Block for Search and Filters -->
+        <div class="col-md-2 ml-4 p-0">
+            <!-- Create a form group to wrap the search input and button -->
+            <div class="form-group d-flex">
+                <!-- Search Form -->
+                <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </div>
+
+            <!-- Add the Filter by Category Dropdown -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Filter by Category
+                </button>
+                <div class="dropdown-menu" style="width: 200px;">
+                    <form>
+                        <div class="form-group">
+                            <label class="dropdown-item">
+                                <input type="checkbox" value="Category 1"> Category 1
+                            </label>
+                            <label class="dropdown-item">
+                                <input type="checkbox" value="Category 2"> Category 2
+                            </label>
+                            <label class="dropdown-item">
+                                <input type="checkbox" value="Category 3"> Category 3
+                            </label>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" id="applyFilters">Apply</button>
+                    </form>
+                </div>
+            </div>
+
+
+            <!-- Add the Filter by Location Dropdown -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Filter by Power
+                </button>
+                <div class="dropdown-menu" style="width: 200px;">
+                    <form>
+                        <div class="form-group">
+                            <label class="dropdown-item">
+                                <input type="checkbox" value="Power 1"> Power 1
+                            </label>
+                            <label class="dropdown-item">
+                                <input type="checkbox" value="Power 2"> Power 2
+                            </label>
+                            <label class="dropdown-item">
+                                <input type="checkbox" value="Power 3"> Power 3
+                            </label>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" id="applyFilters">Apply</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </nav>
 
+        <!-- Main Content (Content on the right side) -->
+        <div class="col-md-9">
 
-
-    <div class="mt-3">
-        <div class="row">
-            <!-- Left Side Block for Search and Filters -->
-            <div class="col-md-2 ml-4 p-0">
-                <!-- Create a form group to wrap the search input and button -->
-                <div class="form-group d-flex">
-                    <!-- Search Form -->
-                    <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </div>
-
-                <!-- Add the Filter by Category Dropdown -->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        Filter by Category
-                    </button>
-                    <div class="dropdown-menu" style="width: 200px;">
-                        <form>
-                            <div class="form-group">
-                                <label class="dropdown-item">
-                                    <input type="checkbox" value="Category 1"> Category 1
-                                </label>
-                                <label class="dropdown-item">
-                                    <input type="checkbox" value="Category 2"> Category 2
-                                </label>
-                                <label class="dropdown-item">
-                                    <input type="checkbox" value="Category 3"> Category 3
-                                </label>
-                            </div>
-                            <button type="button" class="btn btn-primary btn-sm" id="applyFilters">Apply</button>
-                        </form>
+            <div class="container mt-4 border border-secondary rounded">
+                            <div class="d-flex justify-content-between">
+                <button class="btn btn-outline-danger btn-sm" id="deleteDeck">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                <button class="btn btn-primary btn-sm" id="saveDeck">Save Deck</button>
+            </div>
+                <div class="row">
+                    <div class="col-md-8">
                     </div>
-                </div>
+                    <!-- Images Section (flex container) -->
+                    <div class="col-md-8">
+                        <div class="d-flex flex-wrap top-section">
+                            <!-- Deck Cards -->
 
-
-                <!-- Add the Filter by Location Dropdown -->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        Filter by Power
-                    </button>
-                    <div class="dropdown-menu" style="width: 200px;">
-                        <form>
-                            <div class="form-group">
-                                <label class="dropdown-item">
-                                    <input type="checkbox" value="Power 1"> Power 1
-                                </label>
-                                <label class="dropdown-item">
-                                    <input type="checkbox" value="Power 2"> Power 2
-                                </label>
-                                <label class="dropdown-item">
-                                    <input type="checkbox" value="Power 3"> Power 3
-                                </label>
-                            </div>
-                            <button type="button" class="btn btn-primary btn-sm" id="applyFilters">Apply</button>
-                        </form>
+                        </div>
                     </div>
+
+                    <!-- Description Box -->
+                    <div class="col-md-4">
+                        <div class="description-box p-3 card-stats">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4>
+                                    <input type="text" class="form-control" id="teamNameInput"
+                                        placeholder="Your Team Name">
+                                </h4>
+                            </div>
+                            <p>Stats:</p>
+                            <p>Cost:</p>
+                            <p>Power:</p>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
 
-            <!-- Main Content (Content on the right side) -->
-            <div class="col-md-9">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="d-flex flex-wrap">
 
-                <div class="container mt-4">
-                    <div class="row">
-                        <!-- Images Section (flex container) -->
-                        <div class="col-md-8">
-                            <div class="d-flex flex-wrap">
-                                <!-- Image items (each 100px wide) -->
-                                <div class="image-item">
-                                    <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 1"
-                                        width="100">
-                                </div>
-                                <div class="image-item">
-                                    <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 2"
-                                        width="100">
-                                </div>
-                                <div class="image-item">
-                                    <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 2"
-                                        width="100">
-                                </div>
-                                <div class="image-item">
-                                    <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 2"
-                                        width="100">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Description Box -->
-                        <div class="col-md-4">
-                            <div class="description-box p-3">
-                                <h4>Team Overview</h4>
-                                <p>Stats:</p>
-                                <p>Cost:</p>
-                                <p>Power:</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="d-flex flex-wrap">
-
-                                {{#each cData}}
-                                <div class="col-4">
-                                    <div class="card" style="border: none; position: relative;">
-                                        <img src="https://static.marvelsnap.pro/cards/{{cardDefImageID}}.webp" class="card-img" alt="Image" style="max-width: 100%">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">{{name}}</h5>
-                                            <a href="#" class="add-to-deck-button">Add to Deck</a>
-                                        </div>
+                            {{#each cData}}
+                            <div class="col-4">
+                                <div class="card" style="border: none; position: relative;" data-cardid="{{id}}">
+                                    <img src="https://static.marvelsnap.pro/cards/{{cardDefImageID}}.webp"
+                                        class="card-img" alt="Image" style="max-width: 100%">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">{{name}}</h5>
+                                        <a href="#" class="add-to-deck-button">Add to Deck</a>
                                     </div>
                                 </div>
-                                {{/each}}
-                                
-                                
                             </div>
+                            {{/each}}
+
+
                         </div>
                     </div>
+                </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/builddeck.js"></script>
