@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
   
       const cData = dbCardData.map(u => u.get({plain: true}))
      
-      res.render('buildDeck', {cData, loggedIn: req.session.loggedIn});
+      res.render('builddeck', {cData, loggedIn: req.session.loggedIn});
   
     } catch (err) {
       console.log(err);
