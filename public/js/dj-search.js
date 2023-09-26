@@ -17,6 +17,8 @@ function search(){
     
     let Card = inputBox.value
 
+    console.log(Card)
+
 
     if(cb1.checked){
         options.push(1)
@@ -46,7 +48,9 @@ function search(){
 
     options = options.toString()
 
-    url = `/search/findcards?filter=${options}`
+
+
+    url = `/search/findcards?filter=${options}&card=${Card}`
 
     window.location.href = url
 }
