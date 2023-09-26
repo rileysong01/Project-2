@@ -77,7 +77,7 @@ router.get('/',withAuth, async (req, res) => {
 
         // console.log(results)
 
-        a(results).then(e => res.json(e))        
+        a(results).then(e => res.render('viewdecks', {e}))       
     })
     .catch( err => {
         console.log(err);

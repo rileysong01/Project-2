@@ -1,37 +1,4 @@
-<div class="container mt-4">
-    <div class="row">
-        <!-- Delete Deck Button -->
-        <div class="col-md-8">
-            <button class="btn btn-danger float-left" id="deleteDeck">Delete Deck</button>
-        </div>
-        <!-- Images Section (flex container) -->
-        <div class="col-md-8">
-            <div class="d-flex flex-wrap">
-                <!-- Image items (each 100px wide) -->
-                <div class="image-item">
-                    <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 1" width="225">
-                </div>
-                <div class="image-item">
-                    <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 2" width="225">
-                </div>
-                <div class="image-item">
-                    <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 2" width="225">
-                </div>
-                <div class="image-item">
-                    <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 2" width="225">
-                </div>
-            </div>
-        </div>
-
-        <!-- Description Box -->
-        <div class="col-md-4">
-            <div class="description-box p-3">
-                <h4>Team Overview</h4>
-
-            </div>
-        </div>
-    </div>
-</div>
+    {{#each e}}
 
 <div class="container mt-4">
     <div class="row">
@@ -40,33 +7,29 @@
             <button class="btn btn-danger float-left" id="deleteDeck">Delete Deck</button>
         </div>
         <!-- Images Section (flex container) -->
+
         <div class="col-md-8">
             <div class="d-flex flex-wrap">
                 <!-- Image items (each 100px wide) -->
+                {{#each DeckImageID}}
                 <div class="image-item">
-                    <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 1" width="225">
+                    <img src="https://static.marvelsnap.pro/cards/{{card_def_image_i_d}}.webp" alt="Image" width="165">
                 </div>
-                <div class="image-item">
-                    <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 2" width="225">
-                </div>
-                <div class="image-item">
-                    <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 2" width="225">
-                </div>
-                <div class="image-item">
-                    <img src="https://static.marvelsnap.pro/cards/AdamWarlock.webp" alt="Image 2" width="225">
-                </div>
+                {{/each}}
             </div>
         </div>
 
         <!-- Description Box -->
         <div class="col-md-4">
             <div class="description-box p-3">
-                <h4>Team Overview</h4>
+                <h4>{{DeckName}}</h4>
 
             </div>
         </div>
+
+        
     </div>
 </div>
+{{/each}}
 
-    <script src="./js/search.js" ></script>
-    
+<script src="./js/search.js"></script>
