@@ -1,29 +1,26 @@
 const router = require('express').Router();
 const { Players } = require('../../models');
 
-
 router.post('/', (req, res) => {
-  
-    Players.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-    }).then(userData => {
+  Players.create({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+  })
+    .then((userData) => {
       req.session.save(() => {
-      
         req.session.loggedIn = true;
         req.session.playerid = userData.dataValues.id;
-        
-  
-        
+
         // NEED TO ALSO SAVE USERID in cookie session!!
         res.status(200).json(userData);
       });
-      console.log(req.session)
-    }).catch(err =>  {
-      console.log('Error on post method user -> ',err);
-      res.status(500).json(err);
+      console.log(req.session);
     })
+    .catch((err) => {
+      console.log('Error on post method user -> ', err);
+      res.status(500).json(err);
+    });
 });
 
 // Login
@@ -66,7 +63,6 @@ router.post('/login', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 // Logout
 router.post('/logout', (req, res) => {
