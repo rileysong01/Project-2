@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
   try {
     
   
-    res.render('searchpage');
+    res.render('searchpage', {loggedIn: req.session.loggedIn});
 
   } catch (err) {
     console.log(err);
