@@ -29,6 +29,8 @@ router.get('/findCards', async (req, res) => {
       
         fliter = req.query.filter
 
+        card = req.query.card
+
       
         
         fliter = '(' + fliter + ')'
@@ -36,8 +38,8 @@ router.get('/findCards', async (req, res) => {
 
         
         //raw sql SELECT * FROM card WHERE cost in (1,4,6)
-
-        sqlQuary = `SELECT * FROM card WHERE cost in ${fliter}`
+        //SELECT * from card WHERE power in (1,4,6) AND name LIKE "j%"
+        sqlQuary = `SELECT * FROM card WHERE cost in ${fliter} AND name LIKE "${card}%"`
 
         const [results, metadata] = await sequelize.query(sqlQuary);
 
