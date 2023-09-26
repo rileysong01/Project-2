@@ -1,35 +1,6 @@
 const router = require('express').Router();
 const { Players } = require('../../models');
 
-// CREATE new user
-/**
-router.post('/', async (req, res) => {
-  try {
-    const dbUserData = await Players.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-    });
-
-    
-    playerID = dbUserData.dataValues.id;
-    
-    
-
-    req.session.save(() => {
-      req.session.loggedIn = true;
-      req.session.playerid = playerID;
-      // NEED TO ALSO SAVE USERID in cookie session!!
-      res.status(200).json(dbUserData);
-    });
-    console.log(req.session)
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-**/
 
 router.post('/', (req, res) => {
   
