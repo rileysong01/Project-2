@@ -84,7 +84,22 @@ router.get('/',withAuth, async (req, res) => {
         res.status(500).json(err);
     })
 
-  });
+});
+
+router.delete('/mydeck/:id', withAuth, async (req, res) => {
+    let deckId  = req.params.id;
+
+    //DELETE FROM table_name WHERE condition;
+
+    let sqlQuary = `DELETE FROM playerdecks WHERE id = ${deckId};`
+    
+    sequelize.query(sqlQuary).then(fristQresults => fristQresults)
+
+    res.status(200)
+
+    
+
+})
 
 
-  module.exports = router;
+module.exports = router;
