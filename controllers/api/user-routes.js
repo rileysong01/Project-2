@@ -57,22 +57,25 @@ router.post('/', (req, res) => {
 
 // Login
 router.post('/login', (req, res) => {
+  let playerID; // Declare playerID in an accessible scope
+
   Players.findOne({
-      where: {
-        username: req.body.username,
-      },
-    }).then(userData =>{
-      if(userData){
-        playerID = userData.dataValues.id;
-      }
+    where: {
+      username: req.body.username,
+    },
+  })
+    .then((userData) => {
       if (!userData) {
         res
           .status(400)
           .json({ message: 'Incorrect email or password. Please try again!' });
         return;
       }
+      playerID = userData.dataValues.id; // Assign playerID here
+
       return userData.checkPassword(req.body.password);
-    }).then(udb => {
+    })
+    .then((udb) => {
       if (!udb) {
         res
           .status(400)
@@ -81,16 +84,17 @@ router.post('/login', (req, res) => {
       }
       req.session.save(() => {
         req.session.loggedIn = true;
-        req.session.playerid = playerID;
+        req.session.playerid = playerID; // Use playerID here
         res
-        .status(200)
-        .json({ user: udb, message: 'You are now logged in!' });
-        console.log(req.session)
+          .status(200)
+          .json({ user: udb, loggedIn:req.session.loggedIn, message: 'You are now logged in!' });
+        console.log(req.session);
       });
-    }).catch(err => {
-    console.log(err);
-    res.status(500).json(err);
     })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 
