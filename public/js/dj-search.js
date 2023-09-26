@@ -1,7 +1,7 @@
 console.log('loaded the js') 
 
 var searchButton = document.getElementById("search");
-
+var inputBox = document.getElementById("InputBox");
 
 var cb1 = document.getElementById("cb1");
 var cb2 = document.getElementById("cb2");
@@ -14,6 +14,9 @@ var cb6 = document.getElementById("cb6");
 
 function search(){
     options = []
+    
+    let Card = inputBox.value
+
 
     if(cb1.checked){
         options.push(1)
