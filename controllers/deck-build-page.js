@@ -105,9 +105,9 @@ router.post('/', async (req, res) =>{
     
     //if logged in s
     try{
-        console.log("Player ID:" + req.session.playerid)
+        console.log("Player ID:" + req.session.user_id)
 
-        let IDofPlayer = req.session.playerid
+        let IDofPlayer = req.session.user_id
         let deckName = req.body.deckName
         let deckCards = req.body.deckCards
         let cardIDS = JSON.stringify(req.body.cardIDs)
@@ -117,7 +117,7 @@ router.post('/', async (req, res) =>{
         // username?, deck_name, array of card ids 
         // const deck = await PlayerDecks.create({deckName: deckName, deckCards: cardIDS, playerId: IDofPlayer })
         // console.log(deck)
-        res.JSON(results)
+        res.json(results)
     }catch (err){
         console.error(err);
     }
@@ -131,6 +131,8 @@ router.post('/', async (req, res) =>{
 router.get('/redir', async (req, res) => {
     res.redirect('/deckbuild?id=1,2,3,4,5,6');
 })
+
+
 
 
 module.exports = router;
