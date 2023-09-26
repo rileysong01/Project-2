@@ -1,6 +1,3 @@
-const { options } = require("../../controllers");
-
-
 console.log('loaded the js') 
 
 var searchButton = document.getElementById("search");
