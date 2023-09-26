@@ -10,52 +10,44 @@ var cb4 = document.getElementById("cb4");
 var cb5 = document.getElementById("cb5");
 var cb6 = document.getElementById("cb6");
 
-
-
 function search(){
-    options = []
-    
-    let Card = inputBox.value
+    var options = [];
+    var card = inputBox.value.trim(); // Trim to remove leading/trailing white spaces
 
-    console.log(Card)
+    console.log(card);
 
-
-    if(cb1.checked){
-        options.push(1)
+    if (cb1.checked) {
+        options.push(1);
     }
 
-    if(cb2.checked){
-        options.push(2)
+    if (cb2.checked) {
+        options.push(2);
     }
 
-    if(cb3.checked){
-        options.push(3)
+    if (cb3.checked) {
+        options.push(3);
     }
 
-    if(cb4.checked){
-        options.push(4)
+    if (cb4.checked) {
+        options.push(4);
     }
 
-    if(cb5.checked){
-        options.push(5)
+    if (cb5.checked) {
+        options.push(5);
     }
 
-    if(cb6.checked){
-        options.push(6)
+    if (cb6.checked) {
+        options.push(6);
     }
 
-    console.log(options)
+    console.log(options);
 
-    options = options.toString()
+    options = options.join(','); 
 
+    // Build the URL with the input value and selected options
+    var url = `/search/findcards?filter=${options}&card=${encodeURIComponent(card)}`; // Use encodeURIComponent to handle special characters
 
-
-    url = `/search/findcards?filter=${options}&card=${Card}`
-
-    window.location.href = url
+    window.location.href = url;
 }
 
-
-searchButton.addEventListener('click', search)
-
-
+searchButton.addEventListener('click', search);
