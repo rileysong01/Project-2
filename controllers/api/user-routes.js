@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Players } = require('../../models');
 
 // CREATE new user
+/**
 router.post('/', async (req, res) => {
   try {
     const dbUserData = await Players.create({
@@ -10,24 +11,58 @@ router.post('/', async (req, res) => {
       password: req.body.password,
     });
 
+    
+    playerID = dbUserData.dataValues.id;
+    
+    
+
     req.session.save(() => {
       req.session.loggedIn = true;
+      req.session.playerid = playerID;
       // NEED TO ALSO SAVE USERID in cookie session!!
       res.status(200).json(dbUserData);
     });
+    console.log(req.session)
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
+**/
+
+router.post('/', (req, res) => {
+  
+    Players.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+    }).then(userData => {
+      req.session.save(() => {
+      
+        req.session.loggedIn = true;
+        req.session.playerid = userData.dataValues.id;
+        
+  
+        
+        // NEED TO ALSO SAVE USERID in cookie session!!
+        res.status(200).json(userData);
+      });
+      console.log(req.session)
+    }).catch(err =>  {
+      console.log('Error on post method user -> ',err);
+      res.status(500).json(err);
+    })
+});
+
 // Login
-router.post('/login', async (req, res) => {
-  try {
-    const dbUserData = await Players.findOne({
+router.post('/login', (req, res) => {
+    
+  Players.findOne({
       where: {
         username: req.body.username,
       },
+
     });
 
     if (!dbUserData) {
@@ -59,9 +94,12 @@ router.post('/login', async (req, res) => {
 
       console.log(req.session)
   } catch (err) {
+
     console.log(err);
     res.status(500).json(err);
-  }
+    })
+
+
 });
 
 // Logout

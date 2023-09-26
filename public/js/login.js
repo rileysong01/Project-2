@@ -14,6 +14,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
       });
   
       if (response.ok) {
+
         const responseData = await response.json();
         
         if (responseData.loggedIn) {
@@ -25,6 +26,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
           console.log('User is not logged in.');
           alert('Login failed.');
         }
+
       } else {
         console.log(response);
         alert(response.statusText);
@@ -44,6 +46,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
   const password = document.getElementById('signupPassword').value;
   
   if (username && email && password) {
+
     try {
       const response = await fetch('/api/user', {
         method: 'POST',
@@ -52,7 +55,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
       });
   
       if (response.ok) {
-        window.location.replace('/profile');
+        window.location.replace('/');
       } else {
         const errorResponse = await response.json();
         // Handle error messages from the server
@@ -65,6 +68,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
     } catch (error) {
       console.error(error);
       alert('An error occurred while processing your request.');
+
     }
   } else {
     alert('Please fill in all required fields.');
