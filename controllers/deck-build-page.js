@@ -112,12 +112,12 @@ router.post('/', async (req, res) =>{
         let deckCards = req.body.deckCards
         let cardIDS = JSON.stringify(req.body.cardIDs)
 
-        let sqlQuary = `INSERT INTO playerdecks (deck_name, deck_cards, player_id) VALUES (${deckName},${deckCards},${IDofPlayer});`
-
+        let sqlQuary = `INSERT INTO playerdecks (deck_name, deck_cards, player_id) VALUES ('${deckName}','${cardIDS}',${IDofPlayer});`
+        const [results, metadata] = await sequelize.query(sqlQuary);
         // username?, deck_name, array of card ids 
-        const deck = await PlayerDecks.create({deckName: deckName, deckCards: cardIDS, playerId: IDofPlayer })
-        console.log(deck)
-
+        // const deck = await PlayerDecks.create({deckName: deckName, deckCards: cardIDS, playerId: IDofPlayer })
+        // console.log(deck)
+        res.JSON(results)
     }catch (err){
         console.error(err);
     }
@@ -126,7 +126,7 @@ router.post('/', async (req, res) =>{
 
 })
 
-router.delete('/', )
+// router.delete('/', )
 
 router.get('/redir', async (req, res) => {
     res.redirect('/deckbuild?id=1,2,3,4,5,6');
