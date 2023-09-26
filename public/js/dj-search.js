@@ -1,3 +1,4 @@
+
 console.log('loaded the js') 
 
 var searchButton = document.getElementById("search");
@@ -10,11 +11,34 @@ var cb4 = document.getElementById("cb4");
 var cb5 = document.getElementById("cb5");
 var cb6 = document.getElementById("cb6");
 
-function search(){
-    var options = [];
-    var card = inputBox.value.trim(); // Trim to remove leading/trailing white spaces
 
-    console.log(card);
+var cardRadioButton = document.getElementById("cardSearchRadioButton");
+var userRadioButton = document.getElementById("userSearchRadioButton");
+
+
+var costAndStuff = document.getElementById("costnstuff");
+
+//1 for card 2 for user
+var UorC = 1
+
+
+function search(){
+    
+    var searchInput = inputBox.value.trim(); // Trim to remove leading/trailing white spaces
+
+    if(UorC === 2){
+        var url = `/search/search/user/${encodeURIComponent(searchInput)}`; // Use encodeURIComponent to handle special characters
+
+        window.location.href = url;
+        return
+    }
+    
+    
+    
+    var options = [];
+   
+
+    console.log(searchInput);
 
     if (cb1.checked) {
         options.push(1);
@@ -45,9 +69,31 @@ function search(){
     options = options.join(','); 
 
     // Build the URL with the input value and selected options
-    var url = `/search/findcards?filter=${options}&card=${encodeURIComponent(card)}`; // Use encodeURIComponent to handle special characters
+    var url = `/search/findcards?filter=${options}&card=${encodeURIComponent(searchInput)}`; // Use encodeURIComponent to handle special characters
 
     window.location.href = url;
 }
+
+function radioButton(){
+    console.log('radio button clicked')
+
+    if(userRadioButton.checked){
+        costAndStuff.className = 'd-none'
+        UorC = 2
+    }
+
+    if(cardRadioButton.checked){
+        costAndStuff.className = '',
+        UorC = 1
+    }
+
+
+    console.log(UorC)
+}   
+
+
+cardRadioButton.addEventListener('click', radioButton)
+userRadioButton.addEventListener('click', radioButton)
+
 
 searchButton.addEventListener('click', search);
