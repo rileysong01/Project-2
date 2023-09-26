@@ -56,51 +56,45 @@ router.post('/', (req, res) => {
 });
 
 // Login
-router.post('/login', (req, res) => {
-  let playerID; // Declare playerID in an accessible scope
-
-  Players.findOne({
-    where: {
-      username: req.body.username,
-    },
-  })
-    .then((userData) => {
-      if (!userData) {
-        res
-          .status(400)
-          .json({ message: 'Incorrect email or password. Please try again!' });
-        return;
-      }
-      playerID = userData.dataValues.id; // Assign playerID here
-
-      return userData.checkPassword(req.body.password);
-    })
-    .then((udb) => {
-      if (!udb) {
-        res
-          .status(400)
-          .json({ message: 'Incorrect email or password. Please try again!' });
-        return;
-      }
-      req.session.save(() => {
-        req.session.loggedIn = true;
-        req.session.playerid = playerID; // Use playerID here
-        res
-          .status(200)
-          .json({ user: udb, loggedIn:req.session.loggedIn, message: 'You are now logged in!' });
-        console.log(req.session);
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
+router.post('/login', async (req, res) => {
+  try {
+    const dbUserData = await Players.findOne({
+      where: {
+        username: req.body.username,
+      },
     });
+
+    if (!dbUserData) {
+      return res
+        .status(400)
+        .json({ message: 'Incorrect email or password. Please try again!' });
+    }
+
+    const validPassword = await dbUserData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      return res
+        .status(400)
+        .json({ message: 'Incorrect email or password. Please try again!' });
+    }
+
+    req.session.save(() => {
+      req.session.user_id = dbUserData.id;
+      req.session.loggedIn = true;
+
+      res.json({
+        user: dbUserData,
+        loggedIn: req.session.loggedIn,
+        message: 'You are now logged in!',
+      });
+    });
+
+    console.log(req.session);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
 });
-
-
-
-
-
 
 
 // Logout
