@@ -56,51 +56,46 @@ router.post('/', (req, res) => {
 });
 
 // Login
-router.post('/login', (req, res) => {
-    
-  Players.findOne({
+router.post('/login', async (req, res) => {
+  try {
+    const dbUserData = await Players.findOne({
       where: {
         username: req.body.username,
       },
-
     });
 
     if (!dbUserData) {
-      res
+      return res
         .status(400)
         .json({ message: 'Incorrect email or password. Please try again!' });
-      return;
     }
 
     const validPassword = await dbUserData.checkPassword(req.body.password);
 
     if (!validPassword) {
-      res
+      return res
         .status(400)
         .json({ message: 'Incorrect email or password. Please try again!' });
-      return;
     }
+
     req.session.save(() => {
       req.session.user_id = dbUserData.id;
       req.session.loggedIn = true;
-      
-      res.json({ 
-        user: dbUserData, 
-        loggedIn: req.session.loggedIn, // Include loggedIn as a property
-        message: 'You are now logged in!' 
+
+      res.json({
+        user: dbUserData,
+        loggedIn: req.session.loggedIn,
+        message: 'You are now logged in!',
       });
     });
-    
 
-      console.log(req.session)
+    console.log(req.session);
   } catch (err) {
-
-    console.log(err);
+    console.error(err);
     res.status(500).json(err);
-    })
-
-
+  }
 });
+
 
 // Logout
 router.post('/logout', (req, res) => {
