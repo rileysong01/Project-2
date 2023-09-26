@@ -1,6 +1,6 @@
 ![GitHub](https://img.shields.io/github/license/jgarcia45/employee-tracker)
 
-# SQL Challenge: Employee Tracker
+# TCG - Card Tactics
 
 ## Technologies
 
