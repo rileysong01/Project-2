@@ -122,7 +122,7 @@ router.post('/', async (req, res) =>{
         console.error(err);
     }
 
-    res.json(req.body)
+    // res.json(req.body)
 
 })
 

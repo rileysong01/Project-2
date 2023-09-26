@@ -68,7 +68,7 @@ router.get('/search/user/:username', async (req, res) => {
       // console.log(deckData)
 
       // res.json(results)
-      res.render('ViewUser', results);
+      res.render('ViewUser', {results, loggedIn: req.session.loggedIn});
   
     } catch (err) {
       console.log(err);
