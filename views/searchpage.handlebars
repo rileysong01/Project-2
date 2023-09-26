@@ -1,10 +1,24 @@
 <body>
     <div class="container p-5">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Card Name" aria-label="Recipient's username" aria-describedby="button-addon2" id="InputBox">
+            <input type="text" class="form-control" placeholder="Search Input" aria-label="Recipient's username" aria-describedby="button-addon2" id="InputBox">
             <button id="search" class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
         </div>
 
+        
+        <div>
+            <div>
+                <input type="radio" id="cardSearchRadioButton" name="fav_language" value="HTML" checked>
+                <p>card search</p>
+            </div>
+
+            <div>
+                <input type="radio" id="userSearchRadioButton" name="fav_language" value="HTML">
+                <p>user search</p>
+            </div>
+        </div>
+
+        <div id="costnstuff">
         <h3>Cost</h3>
         <div class="form-group d-flex justify-content-center justify-content-between">
             <div class="form-check">
@@ -49,6 +63,10 @@
                 </label>
             </div>
         </div>
+
+        </div>
+
+        
     </div>
 
     <script src="/js/dj-search.js"></script>

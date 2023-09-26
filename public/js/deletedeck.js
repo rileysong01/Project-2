@@ -1,27 +1,29 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     const deleteButtons = document.querySelectorAll(".delete-deck");
 
-    deleteButtons.forEach(async function (button) {
-        button.addEventListener("click", async function () {
-            const deckId = button.getAttribute("data-deckid"); // Get the deck ID from data attribute
+    deleteButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            const deckId = button.getAttribute("data-deckid");
 
-            try {
-                const response = await fetch(`/mydeck/${deckId}`, {
-                    method: "DELETE",
-                });
-
+            fetch(`/mydeck/mydeck/${deckId}`, {
+                method: "DELETE",
+            })
+            .then(response => {
                 if (response.ok) {
                     console.log(`Deck ${deckId} deleted successfully.`);
                     const deckContainer = document.querySelector(`.deckcontainer[data-deckid="${deckId}"]`);
                     if (deckContainer) {
-                        deckContainer.remove();
+                        deckContainer.remove(); // Remove the deck from the DOM
                     }
                 } else {
                     console.error(`Error deleting deck ${deckId}: ${response.status}`);
                 }
-            } catch (error) {
+
+            })
+            .catch(error => {
                 console.error(`Error deleting deck ${deckId}:`, error);
-            }
+            });
         });
     });
 });

@@ -1,0 +1,39 @@
+
+
+
+<div class="container mt-4 text-center">
+    <h1>{{e.[0].Username}}</h1>
+</div>
+
+{{#each e}}
+
+<div class="container mt-4 deckcontainer" data-deckid = "{{DeckID}}">
+    <div class="row">
+        <!-- Delete Deck Button -->
+
+        <!-- Images Section (flex container) -->
+
+        <div class="col-md-8">
+            <div class="d-flex flex-wrap">
+                <!-- Image items (each 100px wide) -->
+                {{#each DeckImageID}}
+                <div class="image-item">
+                    <img src="https://static.marvelsnap.pro/cards/{{card_def_image_i_d}}.webp" alt="Image" width="165">
+                </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <!-- Description Box -->
+        <div class="col-md-4">
+            <div class="description-box p-3">
+                <h4>{{DeckName}}</h4>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+{{/each}}
+

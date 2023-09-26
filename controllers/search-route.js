@@ -64,11 +64,11 @@ router.get('/search/user/:username', async (req, res) => {
       const [results, metadata] = await sequelize.query(sqlQuary);
       
       
-      console.log(results[0])
+      console.log(results)
       // console.log(deckData)
 
-      res.json(results)
-      res.render('ViewUser');
+      // res.json(results)
+      res.render('ViewUser', {results, loggedIn: req.session.loggedIn});
   
     } catch (err) {
       console.log(err);
@@ -76,29 +76,78 @@ router.get('/search/user/:username', async (req, res) => {
     }
 })
 
+//const sqlQuary = `SELECT * FROM playerdecks INNER JOIN  players on players.id = playerdecks.player_id WHERE username LIKE '${req.params.username}%'`
+
+//const [results, metadata] = await sequelize.query(sqlQuary);
+
 
 //get cards for one user
 router.get('/search/decks/:username', async (req, res) => {
-  
-  try {
-      
-      const sqlQuary = `SELECT * FROM playerdecks INNER JOIN  players on players.id = playerdecks.player_id WHERE username LIKE '${req.params.username}%'`
 
-      const [results, metadata] = await sequelize.query(sqlQuary);
-      
-      // const decks = await PlayerDecks.findAll({include: Players});
-  
-      // const deckData = results.map(u => u.get({plain: true}))
-      
-      console.log(results[0])
-      // console.log(deckData)
+  // sqlQuary = `SELECT id,deck_name,deck_cards FROM playerdecks WHERE player_id = ${req.session.user_id}`
 
-      res.json(results)
+  const sqlQuary = `SELECT username,deck_name,deck_cards FROM playerdecks INNER JOIN  players on players.id = playerdecks.player_id WHERE username = '${req.params.username}'`
   
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
+  sequelize.query(sqlQuary).then(fristQresults => fristQresults)
+    .then( fqr => {
+        
+        [results, metadata] = fqr
+
+        var waitlength = results.length
+
+        a = (data) => new Promise((resolve, reject) => {
+            var allInfo = []
+            for (let i = 0; i < data.length; i++) {
+            let DeckObject = {Username: '',DeckID: 0, DeckName: '', DeckImageID: null}
+
+            let cards = data[i].deck_cards.toString()
+            DeckObject.DeckID = data[i].id;
+            DeckObject.DeckName = data[i].deck_name;
+            DeckObject.Username = data[i].username;
+            // console.log(str)
+            
+            cards = cards.substring(1, cards.length - 1);
+
+            cards  =  '(' + cards + ')'
+
+            // console.log(cards)
+
+            sqlQuary2 = `SELECT card_def_image_i_d from card WHERE id in ${cards}`
+            
+            sequelize.query(sqlQuary2).then((r) => {
+                const [results, metadata] = r
+                // console.log(results)
+                DeckObject.DeckImageID =results 
+                allInfo.push(DeckObject)
+                // console.log(allInfo[0].DeckImageID)
+
+                console.log(allInfo.length)
+
+                if(allInfo.length === waitlength){
+                    resolve(allInfo)
+                }
+            })
+
+
+            }
+
+            // resolve('letss gooo')
+
+        });
+        
+
+        // a(fqr).then( value => console.log(value))
+
+        // console.log(results)
+
+        a(results).then(e => res.render('viewUserDecks', {e, loggedIn: req.session.loggedIn}))       
+    })
+    .catch( err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+  
+
 })
 
 
