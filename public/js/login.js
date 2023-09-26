@@ -16,7 +16,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
       if (response.ok) {
 
         const responseData = await response.json();
-        
+        console.log(responseData)
         if (responseData.loggedIn) {
           // User is logged in
           document.location.replace('/');
