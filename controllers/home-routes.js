@@ -11,11 +11,12 @@ const {
   Players,
 } = require('../models');
 
-router.get('/',async (req, res) => {
+router.get('/',withAuth,async (req, res) => {
   try {
     const dbCardData = await Card.findAll();
 
     const cData = dbCardData.map((u) => u.get({ plain: true }));
+    console.log(req.session.loggedIn, '<----------- login')
     console.log(req.session.loggedIn, '<----------- login')
     // for (i=0; i<10000; i++) {
 

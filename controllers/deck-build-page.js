@@ -81,7 +81,7 @@ router.get('/search/decks/:username', async (req, res) => {
     
     try {
         
-        const sqlQuary = `SELECT * FROM playerdecks INNER JOIN  players on players.id = playerdecks.player_id WHERE username LIKE '${req.params.username}%'`
+        const sqlQuary = `SELECT deck_name FROM playerdecks INNER JOIN  players on players.id = playerdecks.player_id WHERE username LIKE '${req.params.username}%'`
 
         const [results, metadata] = await sequelize.query(sqlQuary);
         
@@ -101,18 +101,22 @@ router.get('/search/decks/:username', async (req, res) => {
 })
 
 
-
 router.post('/', async (req, res) =>{
     
     //if logged in s
     try{
-        
+        console.log("Player ID:" + req.session.playerid)
+
+        let IDofPlayer = req.session.playerid
         let deckName = req.body.deckName
-        // console.log(JSON.stringify(req.body.cardIDs))
+        let deckCards = req.body.deckCards
         let cardIDS = JSON.stringify(req.body.cardIDs)
+
+        let sqlQuary = `INSERT INTO playerdecks (deck_name, deck_cards, player_id) VALUES (${deckName},${deckCards},${IDofPlayer});`
+
         // username?, deck_name, array of card ids 
-       PlayerDecks.create({deckName: deckName, deckCards: cardIDS})
-        
+        const deck = await PlayerDecks.create({deckName: deckName, deckCards: cardIDS, playerId: IDofPlayer })
+        console.log(deck)
 
     }catch (err){
         console.error(err);
@@ -122,23 +126,11 @@ router.post('/', async (req, res) =>{
 
 })
 
+router.delete('/', )
 
 router.get('/redir', async (req, res) => {
     res.redirect('/deckbuild?id=1,2,3,4,5,6');
 })
-
-
-// router.get('/getDeck', async (req, res) =>{
-    
-//     //if logged in 
-//     try{
-//         console.log(req.body)
-
-//     }catch (err){
-//         console.error(err);
-//     }
-
-// })
 
 
 module.exports = router;
