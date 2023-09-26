@@ -52,7 +52,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
       });
   
       if (response.ok) {
-        window.location.replace('/profile');
+        window.location.replace('/');
       } else {
         const errorResponse = await response.json();
         // Handle error messages from the server
