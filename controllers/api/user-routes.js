@@ -56,44 +56,49 @@ router.post('/', (req, res) => {
 });
 
 // Login
-router.post('/login', async (req, res) => {
-  try {
-    const dbUserData = await Players.findOne({
+router.post('/login', (req, res) => {
+     
+  Players.findOne({
       where: {
         username: req.body.username,
       },
-    });
+    }).then(userData =>{
+      if(userData){
+        playerID = userData.dataValues.id;
+      }
 
-    if (!dbUserData) {
-      return res
-        .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
-    }
+      if (!userData) {
+        res
+          .status(400)
+          .json({ message: 'Incorrect email or password. Please try again!' });
+        return;
+      }
 
-    const validPassword = await dbUserData.checkPassword(req.body.password);
+      return userData.checkPassword(req.body.password);
+    }).then(udb => {
 
-    if (!validPassword) {
-      return res
-        .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
-    }
 
-    req.session.save(() => {
-      req.session.user_id = dbUserData.id;
-      req.session.loggedIn = true;
+      if (!udb) {
+        res
+          .status(400)
+          .json({ message: 'Incorrect email or password. Please try again!' });
+        return;
+      }
 
-      res.json({
-        user: dbUserData,
-        loggedIn: req.session.loggedIn,
-        message: 'You are now logged in!',
+      req.session.save(() => {
+        req.session.loggedIn = true;
+        req.session.playerid = playerID;
+        res
+        .status(200)
+        .json({ user: udb, message: 'You are now logged in!' });
+        console.log(req.session)
       });
-    });
-
-    console.log(req.session);
-  } catch (err) {
-    console.error(err);
+    }).catch(err => {
+    console.log(err);
     res.status(500).json(err);
-  }
+    })
+
+
 });
 
 
