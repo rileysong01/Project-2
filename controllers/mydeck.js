@@ -16,65 +16,7 @@ const {
   } = require('../models');
 
 
-  //SELECT id,deck_name,deck_cards FROM playerdecks WHERE player_id = 2
-
-//   router.get('/',withAuth, async (req, res) => {
-
-
-//     try{
-
-//     console.log(req.session.user_id)
-
-//     sqlQuary = `SELECT id,deck_name,deck_cards FROM playerdecks WHERE player_id = ${req.session.user_id}`
-    
-//     const [results, metadata] = await sequelize.query(sqlQuary)
-
-    
-//     var allInfo = []
-//     for (let i = 0; i < results.length; i++) {
-//         let DeckObject = {DeckID: 0, DeckName: '', DeckImageID: null}
-
-//         let cards = results[i].deck_cards.toString()
-//         DeckObject.DeckID = results[i].id;
-//         DeckObject.DeckName = results[i].deck_name;
-//         // console.log(str)
-        
-//         cards = cards.substring(1, cards.length - 1);
-
-//         cards  =  '(' + cards + ')'
-
-//         // console.log(cards)
-
-//         sqlQuary2 = `SELECT card_def_image_i_d from card WHERE id in ${cards}`
-        
-//         sequelize.query(sqlQuary2).then((r) => {
-//             const [results, metadata] = r
-//             // console.log(results)
-//             DeckObject.DeckImageID =results 
-//             allInfo.push(DeckObject)
-//             console.log(allInfo[0].DeckImageID)
-//         })
-
-//         // console.log(i)
-//     }
-
-    
-
-//     // console.log(results.length)
-
-//     // sqlQuary2 = `SELECT card_def_image_i_d from card WHERE id in (1,4,6)`
-
-//     // console.log(results)
-
-
-//     res.json({})
-//     }catch (err) {
-//         console.log(err);
-//         res.status(500).json(err);
-//     }
-//   });
-
-
+ 
 router.get('/',withAuth, async (req, res) => {
 
 
@@ -142,47 +84,6 @@ router.get('/',withAuth, async (req, res) => {
         res.status(500).json(err);
     })
 
-
-    // var allInfo = []
-    // for (let i = 0; i < results.length; i++) {
-    //     let DeckObject = {DeckID: 0, DeckName: '', DeckImageID: null}
-
-    //     let cards = results[i].deck_cards.toString()
-    //     DeckObject.DeckID = results[i].id;
-    //     DeckObject.DeckName = results[i].deck_name;
-    //     // console.log(str)
-        
-    //     cards = cards.substring(1, cards.length - 1);
-
-    //     cards  =  '(' + cards + ')'
-
-    //     // console.log(cards)
-
-    //     sqlQuary2 = `SELECT card_def_image_i_d from card WHERE id in ${cards}`
-        
-    //     sequelize.query(sqlQuary2).then((r) => {
-    //         const [results, metadata] = r
-    //         // console.log(results)
-    //         DeckObject.DeckImageID =results 
-    //         allInfo.push(DeckObject)
-    //         console.log(allInfo[0].DeckImageID)
-    //     })
-
-    //     // console.log(i)
-    // }
-    
-    
-    
-
-    // console.log(results.length)
-
-    // sqlQuary2 = `SELECT card_def_image_i_d from card WHERE id in (1,4,6)`
-
-    // console.log(results)
-
-
-    // res.json({})
-    
   });
 
 
