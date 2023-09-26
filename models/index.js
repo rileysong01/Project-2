@@ -5,16 +5,6 @@ const Account = require('./Account');
 
 
 
-
-// Card.sync({force:true}).then(() =>{
-//     card = Card.bulkCreate(dataEntires)
-//     // card.save()
-//   }).then(() =>{
-//     console.log('created new card')
-//   }).catch((err) => {
-//     console.log(err)
-//   })
-
 Players.hasMany(PlayerDecks, { constraints: false });
 // Card.hasMany(PlayerDecks,  { constraints: false })
 

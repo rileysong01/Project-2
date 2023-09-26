@@ -11,7 +11,7 @@ const {
   Players,
 } = require('../models');
 
-router.get('/',withAuth,async (req, res) => {
+router.get('/',async (req, res) => {
   try {
     const dbCardData = await Card.findAll();
 
