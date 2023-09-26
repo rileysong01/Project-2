@@ -43,7 +43,7 @@ router.get('/findCards', async (req, res) => {
 
         cData = results
 
-        res.render('ViewCard',{cData})
+        res.render('ViewCard',{cData, loggedIn: req.session.loggedIn})
         
 
     } catch (err) {
