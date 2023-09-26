@@ -5,7 +5,6 @@ document.getElementById('loginForm').addEventListener('submit', async function (
   // Get input values
   const username = document.getElementById('loginUsername').value;
   const password = document.getElementById('loginPassword').value;
-
   if (username && password) {
     try {
       const response = await fetch('/api/user/login', {
@@ -13,19 +12,21 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         body: JSON.stringify({ username, password }),
         headers: { 'Content-Type': 'application/json' },
       });
-      function myFunction() {
-        console.log('This function is executed every 1 second.');
-      }
-
-      const intervalId = setInterval(myFunction, 1000);
-
-
+  
       if (response.ok) {
-        // window.setTimeout(function () {
-        //   document.location.replace('/');
-        // }, 1000);
-        // document.location.replace('/');
-        document.location.replace('/');
+
+        const responseData = await response.json();
+        
+        if (responseData.loggedIn) {
+          // User is logged in
+          document.location.replace('/');
+          console.log('User is logged in.');
+        } else {
+          // User is not logged in
+          console.log('User is not logged in.');
+          alert('Login failed.');
+        }
+
       } else {
         console.log(response);
         alert(response.statusText);
@@ -35,37 +36,41 @@ document.getElementById('loginForm').addEventListener('submit', async function (
       alert('An error occurred while processing your request.');
     }
   }
-});
+}); // <--- Add this closing curly brace
 
 document.getElementById('signupForm').addEventListener('submit', async function (event) {
   event.preventDefault();
-
-  var username = document.getElementById('signupUsername').value;
-  var email = document.getElementById('signupEmail').value;
-  var password = document.getElementById('signupPassword').value;
-
-  if (username && email && password) {
-    const response = await fetch('/api/user', {
-      method: 'POST',
-      body: JSON.stringify({ username, email, password }),
-      headers: { 'Content-Type': 'application/json' },
-    });
-    
   
-    console.log('first response --> ',response)
+  const username = document.getElementById('signupUsername').value;
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPassword').value;
+  
+  if (username && email && password) {
 
-    if (response.ok) {
-      window.location.replace('/');
-      
-      
-      // window.setTimeout(function () {
-      //   window.location.replace('/');
-      // }, 2000);
+    try {
+      const response = await fetch('/api/user', {
+        method: 'POST',
+        body: JSON.stringify({ username, email, password }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+  
+      if (response.ok) {
+        window.location.replace('/');
+      } else {
+        const errorResponse = await response.json();
+        // Handle error messages from the server
+        if (errorResponse.message) {
+          alert(errorResponse.message);
+        } else {
+          alert('An error occurred while signing up.');
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred while processing your request.');
 
-      
-      
-    } else {
-      alert(response.statusText);
     }
+  } else {
+    alert('Please fill in all required fields.');
   }
 });

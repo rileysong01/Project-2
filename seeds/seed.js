@@ -4,7 +4,7 @@ const CardsJson = require('./Cards.json')
 
 const keys = Object.keys(CardsJson)
 
-dataEntires = []
+const dataEntires = []
 
 keys.forEach(((key) => {
 
@@ -18,7 +18,11 @@ keys.forEach(((key) => {
   };
   
   dataEntires.push(dataEntry)
+
 }))
 
+console.log(dataEntires)
 
 console.log(dataEntires[0])
+
+module.exports = dataEntires;
