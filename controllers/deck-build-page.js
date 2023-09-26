@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { response } = require('express');
 const sequelize = require('../config/connection');
+const withAuth = require('../utils/auth');
 
 const {
   Card,
@@ -14,7 +15,7 @@ const { route } = require('./api');
 const { json } = require('sequelize');
 
 
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
     console.log(req.query)
     try {
       const dbCardData = await Card.findAll();
@@ -30,29 +31,7 @@ router.get('/', async (req, res) => {
 });
 
 
-//this shows all the cards from one player
-router.get('/showAllDecks', async (req, res) => {
-    
-    try {
-        
-        const sqlQuary = 'SELECT * FROM playerdecks INNER JOIN  players on players.id = playerdecks.player_id'
 
-        const [results, metadata] = await sequelize.query(sqlQuary);
-        
-        // const decks = await PlayerDecks.findAll({include: Players});
-    
-        // const deckData = results.map(u => u.get({plain: true}))
-        
-        console.log(results[0])
-        // console.log(deckData)
-
-        res.json(results)
-    
-      } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-      }
-})
 
 
 router.get('/search/user/:username', async (req, res) => {
