@@ -30,7 +30,10 @@ router.get('/',withAuth, async (req, res) => {
     .then( fqr => {
         
         [results, metadata] = fqr
-
+        if (results.length === 0) {
+            // No data associated with player_id
+            return res.render('viewdecks', {loggedIn: req.session.loggedIn});
+        }
         var waitlength = results.length
 
         a = (data) => new Promise((resolve, reject) => {
